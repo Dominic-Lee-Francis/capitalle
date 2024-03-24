@@ -17,6 +17,18 @@ app.get("/users", async (req, res) => {
   }
 });
 
+app.post("/users", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const newUser = await knex("users")
+      .insert({ username, password })
+      .returning("*");
+    res.json(newUser);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
