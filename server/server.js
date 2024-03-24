@@ -17,7 +17,7 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
-app.post("/users", async (req, res) => {
+app.post("/api/users", async (req, res) => {
   try {
     const { username, password } = req.body;
     const newUser = await knex("users")
