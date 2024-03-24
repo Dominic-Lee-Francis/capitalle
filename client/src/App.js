@@ -1,11 +1,12 @@
 import "./App.css";
-import Users from "./Components/Users";
+import Navbar from "./Components/Navbar";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <div className="App">
-      <h1>Capitalle</h1>
-      <Users />
+      <Navbar />
+      <Home />
     </div>
   );
 }
