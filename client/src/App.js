@@ -4,7 +4,7 @@ import Users from "./Components/Users";
 function App() {
   return (
     <div className="App">
-      <h1>App Hello</h1>
+      <h1>Capitalle</h1>
       <Users />
     </div>
   );
