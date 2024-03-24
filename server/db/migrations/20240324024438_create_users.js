@@ -4,12 +4,12 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable("users", (table) => {
-    table.serial("id").primary(); // auto-incrementing id + primary key
-    table.varchar("username", 255).notNullable().unique(); // unique username
-    table.varchar("password", 255).notNullable(); // password
-    table.timestamp("created_at").defaultTo(knex.fn.now()); // created_at timestamp
+    table.increments("id").primary(); // auto-incrementing id + primary key
+    table.string("username").notNullable().unique(); // unique username
+    table.string("password").notNullable(); // password
     table.integer("streak").defaultTo(0); // a users streak od consecutive correct answers
     table.integer("best").defaultTo(0); // a users best streak of consecutive correct answers
+    table.timestamp("created_at").defaultTo(knex.fn.now()); // created_at timestamp
   });
 };
 
