@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
 
+const knexfile = require("./db/knexfile").development;
+const knex = require("knex")(knexfile);
+
+const UserRouter = require("./router/userRouter");
+const UserService = require("./service/userService");
+
+const userService = new UserService(knex);
+
+app.use("/users", new UserRouter(express, userService).router);
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
