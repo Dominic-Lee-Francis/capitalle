@@ -1,0 +1,25 @@
+.navbar {
+  height: 50px;
+  background-color: green;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.nav-list-items {
+  margin-right: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
