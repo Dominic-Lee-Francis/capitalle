@@ -23,3 +23,8 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
