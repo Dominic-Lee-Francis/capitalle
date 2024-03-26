@@ -4,7 +4,7 @@ const Home = () => {
       <h1 className="country">Barbados</h1>
       <img
         className="flag"
-        src="https://worldometers.info/img/flags/bb-flag.gif"
+        src="https://flagcdn.com/bb.svg"
         alt="Flag of Barbados"
       />
       <h2 className="instructions">
