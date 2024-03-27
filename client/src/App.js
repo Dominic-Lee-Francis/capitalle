@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
+        <Navbar user={user} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
