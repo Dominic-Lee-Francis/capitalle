@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ user }) => {
+  const logout = async () => {
+    window.open("http://localhost:8080/auth/logout", "_self");
+  };
+
   return (
     <div className="navbar">
       <span className="logo">
@@ -9,10 +13,12 @@ const Navbar = ({ user }) => {
           Capitalle
         </Link>
       </span>
+      {/* */}
+      {/* If user is logged in, display the following links */}
       {user ? (
         <ul className="nav-list">
           <li className="nav-list-items">
-            <Link className="link" to="/logout">
+            <Link className="link" onClick={logout}>
               Logout
             </Link>
           </li>
@@ -33,6 +39,8 @@ const Navbar = ({ user }) => {
           </li>
         </ul>
       ) : (
+        //
+        //  If user is not logged out, display the following links
         <ul className="nav-list">
           <li className="nav-list-items">
             <Link className="link" to="/login">
