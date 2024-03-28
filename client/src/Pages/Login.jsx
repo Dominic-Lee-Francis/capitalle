@@ -1,12 +1,17 @@
 import "./Login.css";
 
 const Login = () => {
+  const google = () => {
+    window.open("http://localhost:8080/auth/google", "_self");
+  };
   return (
     <div className="login">
       <h1 className="loginTitle">Choose a Login Method</h1>
       <div className="wrapper">
         <div className="left">
-          <div className="loginButton google">Google</div>
+          <div className="loginButton google" onClick={google}>
+            Google
+          </div>
           <div className="loginButton github">Github</div>
         </div>
         <div className="centre">
