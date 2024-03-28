@@ -8,7 +8,7 @@ import Login from "./Pages/Login";
 import Statistics from "./Pages/Statistics";
 import Rules from "./Pages/Rules";
 import Contact from "./Pages/Contact";
-import PleaseLogin from "./Pages/PleaseLogin";
+import Register from "./Pages/Register";
 // React
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -54,12 +54,12 @@ function App() {
             element={user ? <Navigate to="/" /> : <Login />}
           />
           <Route
-            path="/statistics"
-            element={user ? <Statistics /> : <Navigate to="/pleaseLogin" />}
+            path="/register"
+            element={user ? <Navigate to="/" /> : <Register />}
           />
+          <Route path="/statistics" element={<Statistics />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/pleaseLogin" element={<PleaseLogin />} />
         </Routes>
       </div>
     </BrowserRouter>

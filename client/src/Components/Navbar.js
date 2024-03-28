@@ -50,6 +50,12 @@ const Navbar = ({ user }) => {
             </Link>
           </li>
           <li className="nav-list-items">
+            <Link className="link" to="/register">
+              {" "}
+              Register{" "}
+            </Link>
+          </li>
+          <li className="nav-list-items">
             <Link className="link" to="/rules">
               Rules
             </Link>

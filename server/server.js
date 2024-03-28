@@ -8,6 +8,9 @@ const authRoutes = require("./src/routes/auth.js");
 // Server setup
 const app = express();
 
+// db setup TESTING MIGHT REMOVE LATER
+const { pool } = require("./db/dbconfig");
+
 // Middleware
 app.use(
   cookieSession({
@@ -16,6 +19,8 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
+// send user data to the views
+app.use(express.urlencoded({ extended: false }));
 
 // Initialize passport
 app.use(passport.initialize());
