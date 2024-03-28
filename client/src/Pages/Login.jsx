@@ -4,6 +4,9 @@ const Login = () => {
   const google = () => {
     window.open("http://localhost:8080/auth/google", "_self");
   };
+  const github = () => {
+    window.open("http://localhost:8080/auth/github", "_self");
+  };
   return (
     <div className="login">
       <h1 className="loginTitle">Choose a Login Method</h1>
@@ -12,7 +15,9 @@ const Login = () => {
           <div className="loginButton google" onClick={google}>
             Google
           </div>
-          <div className="loginButton github">Github</div>
+          <div className="loginButton github" onClick={github}>
+            Github
+          </div>
         </div>
         <div className="centre">
           <div className="line" />

@@ -31,11 +31,23 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_URL);
 });
 
+// Google OAuth
 router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 
 router.get(
   "/google/callback",
   passport.authenticate("google", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
+// Github OAuth
+router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
   })
