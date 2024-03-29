@@ -17,6 +17,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Fetch the user data from the server
     const getUser = async () => {
       fetch("http://localhost:8080/auth/login/success", {
         method: "GET",
