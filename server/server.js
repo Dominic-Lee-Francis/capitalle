@@ -1,9 +1,15 @@
 // Modules
+// express - web framework for Node.js
 const express = require("express");
+// cookie-session - cookie middleware for Express
 const cookieSession = require("cookie-session");
-const passportSetup = require("./passport");
+// passport - authentication middleware for Node.js
 const passport = require("passport");
+// passport-setup - configuration from passport.js
+const passportSetup = require("./passport");
+// cors - middleware for enabling CORS with various options
 const cors = require("cors");
+// auth routes
 const authRoutes = require("./src/routes/auth.js");
 // Server setup
 const app = express();
@@ -12,6 +18,8 @@ const app = express();
 const { pool } = require("./db/dbconfig");
 
 // Middleware
+app.use(express.json()); // parse json data req.body
+// cookie-session middleware
 app.use(
   cookieSession({
     name: "session",
@@ -26,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Cors
+// Cors is used for enabling CORS with various options such as origin, methods, credentials
 app.use(
   cors({
     origin: "http://localhost:3000",

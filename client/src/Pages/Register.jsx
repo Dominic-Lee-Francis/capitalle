@@ -6,8 +6,6 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -18,8 +16,8 @@ const Register = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      const parseRes = await response.json();
-      console.log(parseRes);
+      console.log(response);
+      console.log(body);
     } catch (err) {
       console.error(err.message);
     }
@@ -50,20 +48,6 @@ const Register = () => {
             className="registerInput"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="registerInput"
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              if (e.target.value !== password) {
-                setError("Passwords do not match");
-              } else {
-                setError("");
-              }
-            }}
           />
           <button className="submit">Register</button>
         </form>

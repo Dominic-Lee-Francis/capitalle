@@ -1,8 +1,16 @@
 const router = require("express").Router();
 const passport = require("passport");
 
+// client URL for development (will need to change for deployment)
 const CLIENT_URL = "http://localhost:3000/";
 
+// Register
+router.post("/register", async (req, res) => {
+  console.log(req.body);
+  res.send("register");
+});
+
+// Login
 router.get("/login/success", (req, res) => {
   if (req.user) {
     res.status(200).json({
@@ -19,6 +27,7 @@ router.get("/login/success", (req, res) => {
   }
 });
 
+// Login failed
 router.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
@@ -26,6 +35,7 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
+// Logout
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect(CLIENT_URL);
