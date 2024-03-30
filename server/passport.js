@@ -50,29 +50,29 @@ passport.use(
 // LOCAL STRATEGY //
 
 // Register
-passport.use(
-  "local-register",
-  new LocalStrategy(
-    {
-      usernameField: "username",
-      emailField: "email",
-      passwordField: "password",
-      passReqToCallback: true,
-    },
-    async (req, res) => {
-      try {
-        const { username, email, password } = req.body;
-        const newUser = await pool.query(
-          "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-          [username, email, password]
-        );
-        // res.json(newUser);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }
-  )
-);
+// passport.use(
+//   "local-register",
+//   new LocalStrategy(
+//     {
+//       usernameField: "username",
+//       emailField: "email",
+//       passwordField: "password",
+//       passReqToCallback: true,
+//     },
+//     async (req, res) => {
+//       try {
+//         const { username, email, password } = req.body;
+//         const newUser = await pool.query(
+//           "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+//           [username, email, password]
+//         );
+//         // res.json(newUser);
+//       } catch (error) {
+//         console.error(error.message);
+//       }
+//     }
+//   )
+// );
 
 // Login
 passport.use(

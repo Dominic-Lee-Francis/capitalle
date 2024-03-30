@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
@@ -8,18 +9,36 @@ const pool = require("../../db/dbconfig.js");
 const CLIENT_URL = "http://localhost:3000/";
 
 // Register
-// router.post("/register", async (req, res) => {
-//   try {
-//     const { username, email, password } = req.body;
-//     const newUser = await pool.query(
-//       "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-//       [username, email, password]
-//     );
-//     res.json(newUser);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// });
+router.post("/register", async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        console.error(err);
+      }
+      pool.query(
+        "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+        [username, email, hash],
+        (err, result) => {
+          if (err) {
+            console.error(err);
+          }
+          res.json(result.rows);
+        }
+      );
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+//   const newUser = await pool.query(
+//     "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+//     [username, email, password]
+//   );
+//   res.json(newUser);
+// } catch (error) {
+//   console.error(error.message);
+// }
 
 // Login
 router.get("/login/success", (req, res) => {
@@ -85,12 +104,12 @@ router.post(
 );
 
 // Register
-router.post(
-  "/local-register",
-  passport.authenticate("local-register", {
-    successRedirect: CLIENT_URL,
-    failureRedirect: "/rules",
-  })
-);
+// router.post(
+//   "/local-register",
+//   passport.authenticate("local-register", {
+//     successRedirect: CLIENT_URL,
+//     failureRedirect: "/rules",
+//   })
+// );
 
 module.exports = router;
