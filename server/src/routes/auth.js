@@ -1,25 +1,25 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-// db setup TESTING MIGHT REMOVE LATER
+// db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
 
 // client URL for development (will need to change for deployment)
 const CLIENT_URL = "http://localhost:3000/";
 
 // Register
-router.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    const newUser = await pool.query(
-      "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-      [username, email, password]
-    );
-    res.json(newUser);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+// router.post("/register", async (req, res) => {
+//   try {
+//     const { username, email, password } = req.body;
+//     const newUser = await pool.query(
+//       "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+//       [username, email, password]
+//     );
+//     res.json(newUser);
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 // Login
 router.get("/login/success", (req, res) => {
@@ -71,6 +71,25 @@ router.get(
   passport.authenticate("github", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
+  })
+);
+
+// Local Strategy
+// Login
+router.post(
+  "/local-login",
+  passport.authenticate("local-login", { failureRedirect: "/login" }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
+
+// Register
+router.post(
+  "/local-register",
+  passport.authenticate("local-register", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/rules",
   })
 );
 

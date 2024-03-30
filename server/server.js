@@ -5,8 +5,6 @@ const express = require("express");
 const cookieSession = require("cookie-session");
 // passport - authentication middleware for Node.js
 const passport = require("passport");
-// passport-setup - configuration from passport.js
-const passportSetup = require("./passport");
 // cors - middleware for enabling CORS with various options
 const cors = require("cors");
 // auth routes
@@ -26,6 +24,9 @@ app.use(
 );
 // send user data to the views
 app.use(express.urlencoded({ extended: false }));
+
+// passport-setup - configuration from passport.js
+const passportSetup = require("./passport");
 
 // Initialize passport
 app.use(passport.initialize());
