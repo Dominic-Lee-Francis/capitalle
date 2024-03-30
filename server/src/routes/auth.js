@@ -31,14 +31,6 @@ router.post("/register", async (req, res) => {
     console.error(error.message);
   }
 });
-//   const newUser = await pool.query(
-//     "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-//     [username, email, password]
-//   );
-//   res.json(newUser);
-// } catch (error) {
-//   console.error(error.message);
-// }
 
 // Login
 router.get("/login/success", (req, res) => {
@@ -103,6 +95,7 @@ router.post(
   }
 );
 
+// PASSPORT REGISTER STRATEGY NOT PLANNING TO USE//
 // Register
 // router.post(
 //   "/local-register",

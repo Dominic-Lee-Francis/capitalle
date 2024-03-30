@@ -49,7 +49,7 @@ passport.use(
 
 // LOCAL STRATEGY //
 
-// Register
+// REGISTER STRATEGY NOT PLANNING TO USE
 // passport.use(
 //   "local-register",
 //   new LocalStrategy(
