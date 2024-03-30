@@ -1,13 +1,24 @@
 const router = require("express").Router();
 const passport = require("passport");
 
+// db setup TESTING MIGHT REMOVE LATER
+const pool = require("../../db/dbconfig.js");
+
 // client URL for development (will need to change for deployment)
 const CLIENT_URL = "http://localhost:3000/";
 
 // Register
 router.post("/register", async (req, res) => {
-  console.log(req.body);
-  res.send("register");
+  try {
+    const { username, email, password } = req.body;
+    const newUser = await pool.query(
+      "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
+      [username, email, password]
+    );
+    res.json(newUser);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 // Login

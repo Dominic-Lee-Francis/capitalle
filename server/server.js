@@ -14,9 +14,6 @@ const authRoutes = require("./src/routes/auth.js");
 // Server setup
 const app = express();
 
-// db setup TESTING MIGHT REMOVE LATER
-const { pool } = require("./db/dbconfig");
-
 // Middleware
 app.use(express.json()); // parse json data req.body
 // cookie-session middleware
@@ -43,6 +40,7 @@ app.use(
   })
 );
 
+// ROUTES //
 // Auth routes
 app.use("/auth", authRoutes);
 
