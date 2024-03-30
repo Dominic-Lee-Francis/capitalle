@@ -7,6 +7,9 @@ const Login = () => {
   const github = () => {
     window.open("http://localhost:8080/auth/github", "_self");
   };
+  const localLogin = () => {
+    window.open("http://localhost:8080/auth/local-login", "_self");
+  };
   return (
     <div className="login">
       <h1 className="loginTitle">Choose a Login Method</h1>
@@ -30,7 +33,9 @@ const Login = () => {
             placeholder="Password"
             className="loginInput"
           />
-          <button className="submit">Login</button>
+          <button className="submit" onClick={localLogin}>
+            Login
+          </button>
         </div>
       </div>
     </div>

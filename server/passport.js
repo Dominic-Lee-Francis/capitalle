@@ -4,6 +4,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 // db setup (will need to change for deployment)
 const pool = require("./db/dbconfig.js");
