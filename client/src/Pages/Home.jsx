@@ -1,4 +1,4 @@
-import Hints from "../Components/Hints";
+import Hint from "../Components/Hint";
 
 const Home = ({ country }) => {
   return (
@@ -14,7 +14,7 @@ const Home = ({ country }) => {
         type="text"
         placeholder="Enter your guess here"
       />
-      <Hints />
+      <Hint />
     </div>
   );
 };
