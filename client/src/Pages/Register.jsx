@@ -25,6 +25,7 @@ const Register = () => {
         console.log(response);
         console.log(body);
         window.location = "/login";
+        alert("Account created successfully, please login.");
       }
     } catch (err) {
       console.error(err.message);

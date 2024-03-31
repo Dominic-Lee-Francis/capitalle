@@ -3,6 +3,10 @@
 const express = require("express");
 // cookie-session - cookie middleware for Express
 const cookieSession = require("cookie-session");
+// express-session - session middleware for Express
+const session = require("express-session");
+// flash - flash messages for Express
+const flash = require("express-flash");
 // passport - authentication middleware for Node.js
 const passport = require("passport");
 // cors - middleware for enabling CORS with various options
@@ -16,14 +20,26 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // parse json data req.body
-// cookie-session middleware
+// express-session middleware
 app.use(
-  cookieSession({
-    name: "session",
-    keys: ["key1"],
-    maxAge: 24 * 60 * 60 * 1000,
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
+
+// flash middleware
+app.use(flash());
+// cookie-session middleware
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: ["key1"],
+//     maxAge: 24 * 60 * 60 * 1000,
+//   })
+// );
 // send user data to the views
 app.use(express.urlencoded({ extended: false }));
 

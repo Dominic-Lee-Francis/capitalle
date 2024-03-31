@@ -71,6 +71,17 @@ router.post("/register", async (req, res) => {
         }
       }
     );
+    pool.query(
+      `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
+      [username, email, hashedPassword],
+      (err, results) => {
+        if (err) {
+          throw err;
+        }
+        console.log(results.rows);
+        res.json(results.rows);
+      }
+    );
   }
 });
 
