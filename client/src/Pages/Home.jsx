@@ -1,3 +1,5 @@
+import Hints from "../Components/Hints";
+
 const Home = ({ country }) => {
   return (
     <div className="home">
@@ -12,6 +14,7 @@ const Home = ({ country }) => {
         type="text"
         placeholder="Enter your guess here"
       />
+      <Hints />
     </div>
   );
 };

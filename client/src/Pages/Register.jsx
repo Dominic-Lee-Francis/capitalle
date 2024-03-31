@@ -18,6 +18,7 @@ const Register = () => {
       });
       console.log(response);
       console.log(body);
+      window.location = "/login";
     } catch (err) {
       console.error(err.message);
     }
