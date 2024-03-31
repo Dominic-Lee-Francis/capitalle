@@ -9,6 +9,8 @@ const passport = require("passport");
 const cors = require("cors");
 // auth routes
 const authRoutes = require("./src/routes/auth.js");
+// capital routes
+const capitalRoutes = require("./src/routes/capital.js");
 // Server setup
 const app = express();
 
@@ -44,6 +46,9 @@ app.use(
 // ROUTES //
 // Auth routes
 app.use("/auth", authRoutes);
+
+// Capital routes
+app.use("/capital", capitalRoutes);
 
 // Server setup
 app.listen(8080, () => {

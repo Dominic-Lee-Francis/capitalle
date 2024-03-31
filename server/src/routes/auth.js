@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
           if (err) {
             console.error(err);
           }
-          res.json(result.rows);
+          res.json(result.rows[0]);
         }
       );
     });

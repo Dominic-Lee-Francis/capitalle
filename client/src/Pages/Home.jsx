@@ -1,12 +1,9 @@
-const Home = () => {
+const Home = ({ country }) => {
   return (
     <div className="home">
-      <h1 className="country">Barbados</h1>
-      <img
-        className="flag"
-        src="https://flagcdn.com/bb.svg"
-        alt="Flag of Barbados"
-      />
+      <h1>Guess the Capital</h1>
+      {country && <h1>{country.name}</h1>}
+      <img className="flag" src={country.flag} alt="Todays flag" />
       <h2 className="instructions">
         Guess the capital. You have 6 guesses remaining.
       </h2>
