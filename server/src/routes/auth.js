@@ -9,44 +9,6 @@ const pool = require("../../db/dbconfig.js");
 const CLIENT_URL = "http://localhost:3000/";
 const REGISTER_URL = "http://localhost:3000/register";
 
-// Register
-// router.post("/register", async (req, res) => {
-//   try {
-//     const { username, email, password } = req.body;
-
-//     let errors = [];
-
-//     if (!username || !email || !password) {
-//       errors.push({ message: "Please enter all fields" });
-//     }
-
-//     if (password.length < 6) {
-//       errors.push({ message: "Password must be a least 6 characters long" });
-//     }
-//     if (errors.length > 0) {
-//       return res.render(REGISTER_URL, { errors });
-//     } else {
-//       bcrypt.hash(password, 10, (err, hash) => {
-//         if (err) {
-//           console.error(err);
-//         }
-//         pool.query(
-//           "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-//           [username, email, hash],
-//           (err, result) => {
-//             if (err) {
-//               console.error(err);
-//             }
-//             res.json(result.rows[0]);
-//           }
-//         );
-//       });
-//     }
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// });
-
 // REGISTER
 router.post("/register", async (req, res) => {
   let { username, email, password, password2 } = req.body;
@@ -78,22 +40,37 @@ router.post("/register", async (req, res) => {
   }
   // if no errors - insert user into db
   else {
-    // Hash password
-    bcrypt.hash(password, 10, (err, hash) => {
-      if (err) {
-        console.error(err);
-      }
-      pool.query(
-        "INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *",
-        [username, email, hash],
-        (err, result) => {
-          if (err) {
-            console.error(err);
-          }
-          res.json(result.rows[0]);
+    let hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+
+    pool.query(
+      `SELECT * FROM users WHERE email = $1`,
+      [email],
+      (err, results) => {
+        if (err) {
+          throw err;
         }
-      );
-    });
+        console.log(results.rows);
+        if (results.rows.length > 0) {
+          errors.push({ message: "Email is already registered" });
+          res.json({ errors });
+        }
+      }
+    );
+    pool.query(
+      `SELECT * FROM users WHERE username = $1`,
+      [username],
+      (err, results) => {
+        if (err) {
+          throw err;
+        }
+        console.log(results.rows);
+        if (results.rows.length > 0) {
+          errors.push({ message: "Username is already registered" });
+          res.json({ errors });
+        }
+      }
+    );
   }
 });
 
@@ -159,15 +136,5 @@ router.post(
     res.redirect("/");
   }
 );
-
-// PASSPORT REGISTER STRATEGY NOT PLANNING TO USE//
-// Register
-// router.post(
-//   "/local-register",
-//   passport.authenticate("local-register", {
-//     successRedirect: CLIENT_URL,
-//     failureRedirect: "/rules",
-//   })
-// );
 
 module.exports = router;
