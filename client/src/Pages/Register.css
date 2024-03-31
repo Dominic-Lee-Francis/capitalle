@@ -41,5 +41,10 @@
 .registerInput {
   width: 200px;
   padding: 15px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.errorList {
+  color: red;
+  list-style: none;
 }

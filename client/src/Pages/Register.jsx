@@ -6,19 +6,26 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { username, email, password };
+      const body = { username, email, password, password2, errors };
       const response = await fetch("http://localhost:8080/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
-      console.log(body);
-      window.location = "/login";
+      const data = await response.json();
+      if (data.errors) {
+        setErrors(data.errors);
+      } else {
+        console.log(response);
+        console.log(body);
+        window.location = "/login";
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -29,6 +36,11 @@ const Register = () => {
       <h1 className="registerTitle">Create an Account</h1>
       <div className="wrapper">
         <form className="centre" onSubmit={onSubmitForm}>
+          <ul className="errorList">
+            {errors.map((error) => (
+              <li key={error.message}>{error.message}</li>
+            ))}
+          </ul>
           <input
             type="text"
             placeholder="Username"
@@ -49,6 +61,13 @@ const Register = () => {
             className="registerInput"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="registerInput"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
           />
           <button className="submit">Register</button>
         </form>
