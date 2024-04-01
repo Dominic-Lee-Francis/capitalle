@@ -109,6 +109,40 @@ passport.use(
 );
 
 // LOCAL LOGIN STRATEGY //
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password",
+    },
+    (username, password, done) => {
+      pool.query(
+        `SELECT * FROM users WHERE username = $1`,
+        [username],
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+          if (results.rows.length > 0) {
+            const user = results.rows[0];
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+              if (err) {
+                throw err;
+              }
+              if (isMatch) {
+                done(null, user);
+              } else {
+                done(null, false);
+              }
+            });
+          } else {
+            done(null, false);
+          }
+        }
+      );
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, user);
