@@ -6,6 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("users", (table) => {
     table.increments("id").primary(); // auto-incrementing id + primary key
     table.string("google_id").unique(); // google id
+    table.string("github_id").unique(); // github id
     table.string("username").notNullable().unique(); // unique username
     table.string("email").unique(); // unique email
     table.string("password").notNullable(); // password

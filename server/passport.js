@@ -81,29 +81,29 @@ passport.use(
         password: "",
       };
       console.log(account);
-      // pool.query(
-      //   `SELECT * FROM users WHERE github_id = $1`,
-      //   [account.github_id],
-      //   (err, results) => {
-      //     if (err) {
-      //       throw err;
-      //     }
-      //     if (results.rows.length > 0) {
-      //       done(null, account);
-      //     } else {
-      //       pool.query(
-      //         `INSERT INTO users (github_id, username, password) VALUES ($1, $2, $3) RETURNING *`,
-      //         [account.github_id, account.username, account.password],
-      //         (err, results) => {
-      //           if (err) {
-      //             throw err;
-      //           }
-      //           done(null, account);
-      //         }
-      //       );
-      //     }
-      //   }
-      // );
+      pool.query(
+        `SELECT * FROM users WHERE github_id = $1`,
+        [account.github_id],
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+          if (results.rows.length > 0) {
+            done(null, account);
+          } else {
+            pool.query(
+              `INSERT INTO users (github_id, username, password) VALUES ($1, $2, $3) RETURNING *`,
+              [account.github_id, account.username, account.password],
+              (err, results) => {
+                if (err) {
+                  throw err;
+                }
+                done(null, account);
+              }
+            );
+          }
+        }
+      );
     }
   )
 );
