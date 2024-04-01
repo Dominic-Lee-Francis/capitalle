@@ -48,6 +48,7 @@ const Register = () => {
             className="registerInput"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="off"
           />
           <input
             type="email"
@@ -55,6 +56,7 @@ const Register = () => {
             className="registerInput"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="off"
           />
           <input
             type="password"

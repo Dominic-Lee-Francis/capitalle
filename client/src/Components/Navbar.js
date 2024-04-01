@@ -17,7 +17,7 @@ const Navbar = ({ user }) => {
       {/* If user is logged in, display the following links */}
       {user ? (
         <ul className="nav-list">
-          <li className="nav-list-items name">{user.displayName}</li>
+          <li className="nav-list-items name">{user.username}</li>
           <li className="nav-list-items">
             <Link className="link" onClick={logout}>
               Logout

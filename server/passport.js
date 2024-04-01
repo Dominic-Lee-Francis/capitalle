@@ -24,8 +24,40 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
-      console;
+      const account = {
+        google_id: profile.id,
+        username: profile.displayName,
+        email:
+          profile.emails && profile.emails.length > 0
+            ? profile.emails[0].value
+            : "",
+        password: "",
+      };
+
+      pool.query(
+        `SELECT * FROM users WHERE google_id = $1`,
+        [account.google_id],
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+          if (results.rows.length > 0) {
+            done(null, account);
+          } else {
+            pool.query(
+              `INSERT INTO users (google_id, username, password) VALUES ($1, $2, $3) RETURNING *`,
+              [account.google_id, account.username, account.password],
+              (err, results) => {
+                if (err) {
+                  throw err;
+                }
+                done(null, account);
+              }
+            );
+          }
+        }
+      );
+      console.log(account);
     }
   )
 );
@@ -42,7 +74,36 @@ passport.use(
       callbackURL: "/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      const account = {
+        github_id: profile.id,
+        username: profile.username,
+        email: profile.emails ? profile.emails[0].value : "",
+        password: "",
+      };
+      console.log(account);
+      // pool.query(
+      //   `SELECT * FROM users WHERE github_id = $1`,
+      //   [account.github_id],
+      //   (err, results) => {
+      //     if (err) {
+      //       throw err;
+      //     }
+      //     if (results.rows.length > 0) {
+      //       done(null, account);
+      //     } else {
+      //       pool.query(
+      //         `INSERT INTO users (github_id, username, password) VALUES ($1, $2, $3) RETURNING *`,
+      //         [account.github_id, account.username, account.password],
+      //         (err, results) => {
+      //           if (err) {
+      //             throw err;
+      //           }
+      //           done(null, account);
+      //         }
+      //       );
+      //     }
+      //   }
+      // );
     }
   )
 );
