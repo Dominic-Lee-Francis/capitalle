@@ -49,27 +49,36 @@ passport.use(
 
 // LOCAL LOGIN STRATEGY //
 passport.use(
-  "local-login",
   new LocalStrategy(
-    {
-      usernameField: "username",
-      passwordField: "password",
-      passReqToCallback: true,
-    },
-    async (req, res) => {
+    { usernameField: "username", passwordField: "password" },
+    async (username, password, done) => {
       try {
-        const { username, password } = req.body;
         const user = await pool.query(
-          "SELECT * FROM users WHERE username = $1 AND password = $2",
-          [username, password]
+          "SELECT * FROM users WHERE username = $1",
+          [username]
         );
-        // res.json(user);
-      } catch (error) {
-        console.error(error.message);
+
+        if (user.rows.length === 0) {
+          return done(null, false, { message: "Incorrect username." });
+        }
+
+        const validPassword = await bcrypt.compare(
+          password,
+          user.rows[0].password
+        );
+
+        if (!validPassword) {
+          return done(null, false, { message: "Incorrect password." });
+        }
+
+        return done(null, user.rows[0]);
+      } catch (err) {
+        return done(err);
       }
     }
   )
 );
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });

@@ -5,6 +5,8 @@ const express = require("express");
 const cookieSession = require("cookie-session");
 // express-session - session middleware for Express
 const session = require("express-session");
+// pg session
+const pgSession = require("connect-pg-simple")(session);
 // flash - flash messages for Express
 const flash = require("express-flash");
 // passport - authentication middleware for Node.js
@@ -17,6 +19,9 @@ const authRoutes = require("./src/routes/auth.js");
 const capitalRoutes = require("./src/routes/capital.js");
 // Server setup
 const app = express();
+
+// db setup (will need to change for deployment)
+const pool = require("./db/dbconfig.js");
 
 // Middleware
 app.use(express.json()); // parse json data req.body

@@ -140,12 +140,13 @@ router.get(
 
 // Local Strategy
 // Login
-router.post(
-  "/local-login",
-  passport.authenticate("local-login", { failureRedirect: "/login" }),
-  function (req, res) {
-    res.redirect("/");
-  }
-);
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "user has successfully authenticated",
+    user: req.user,
+    successRedirect: CLIENT_URL,
+  });
+});
 
 module.exports = router;
