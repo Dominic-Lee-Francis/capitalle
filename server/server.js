@@ -17,6 +17,10 @@ const cors = require("cors");
 const authRoutes = require("./src/routes/auth.js");
 // capital routes
 const capitalRoutes = require("./src/routes/capital.js");
+// Token routes
+// const tokenRoutes = require("./token.js");
+// Passport Local routes
+const passportLocalRoutes = require("./src/routes/passportLocal.js");
 // Server setup
 const app = express();
 
@@ -68,8 +72,14 @@ app.use(
 // Auth routes
 app.use("/auth", authRoutes);
 
+// Passport Local routes
+app.use("/passportLocal", passportLocalRoutes);
+
 // Capital routes
 app.use("/capital", capitalRoutes);
+
+// Token routes
+// app.use("/token", tokenRoutes);
 
 // Server setup
 app.listen(8080, () => {
