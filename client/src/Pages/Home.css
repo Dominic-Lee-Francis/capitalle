@@ -10,4 +10,9 @@
 .flag {
   max-width: 500px;
   max-height: 300px;
+  border: 1px solid #000000;
+}
+
+.guessesRed {
+  color: red;
 }

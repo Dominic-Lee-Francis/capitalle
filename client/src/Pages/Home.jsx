@@ -93,7 +93,7 @@ const Home = ({ country, user }) => {
       if (guesses === 1) {
         // if the guesses reach 0, alert the user with the correct answer
         setFeedback(
-          `Unlucky! The capital of ${country.name} is ${answer}! Try again tomorrow!`
+          `Unlucky! The capital of ${country.name} is '${answer}'! Try again tomorrow!`
         );
         setCapital("");
         setDescription(descriptionDB);
@@ -111,7 +111,9 @@ const Home = ({ country, user }) => {
       <h1 className="homeTitle">Guess the Capital</h1>
       {country && <h1 className="countryName">{country.name}</h1>}
       <img className="flag" src={country.flag} alt="Todays flag" />
-      <h3 className="guessesRemaining">Guesses remaining: {guesses}</h3>
+      <h3 className="guessesRemaining">
+        Guesses remaining: <span className="guessesRed">{guesses}</span>
+      </h3>
       {feedback && <h3>{feedback}</h3>}
       {description && <p>{description}</p>}
       <form className="guessForm" onSubmit={checkAnswer}>
