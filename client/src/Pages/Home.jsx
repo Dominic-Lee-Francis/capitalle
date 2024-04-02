@@ -14,7 +14,7 @@ const Home = ({ country }) => {
         type="text"
         placeholder="Enter your guess here"
       />
-      <Hint />
+      <Hint country={country} />
     </div>
   );
 };
