@@ -49,10 +49,11 @@ app.use(
     genid: (req) => {
       return uuidv4(); // use UUIDs for session IDs
     },
+    name: "user_sid",
     secret: EXPRESS_SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 10000 },
+    cookie: { maxAge: 60 * 60 * 10000 }, // CHANGe
   })
 );
 
