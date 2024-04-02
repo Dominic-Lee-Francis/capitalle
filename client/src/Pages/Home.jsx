@@ -1,7 +1,7 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
 
-const Home = ({ country, user }) => {
+const Home = ({ country }) => {
   // get the capital from the country object in the database
   const answer = country.capital;
   // set the number of guesses to 6
@@ -25,34 +25,6 @@ const Home = ({ country, user }) => {
   // was user correct or not
   const [correct, setCorrect] = useState(false);
   console.log(correct);
-
-  // update player streak if a user is logged in
-  useEffect(() => {
-    if (user) {
-      if (correct) {
-        fetch("http://localhost:8080/capital/updateStreak", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user: user }),
-        })
-          .then((response) => {
-            console.log(response);
-            if (response.status === 200) return response.json();
-            throw new Error("failed to update streak");
-          })
-          .then((resObject) => {
-            console.log(resObject);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    } else {
-      console.log("No user logged in");
-    }
-  }, [correct]);
 
   // check the answer in the form submission
   const checkAnswer = (e) => {
