@@ -73,7 +73,7 @@ function App() {
       <div className="App">
         <Navbar user={user} />
         <Routes>
-          <Route path="/" element={<Home country={country} />} />
+          <Route path="/" element={<Home country={country} user={user} />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}

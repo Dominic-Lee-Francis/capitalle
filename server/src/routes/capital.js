@@ -18,6 +18,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// update the streak of a user
+router.put("/updateStreak", async (req, res) => {
+  try {
+    const { user } = req.body;
+    const updateStreak = await pool.query(
+      "UPDATE users SET streak = streak + 1 WHERE id = $1",
+      [user.id]
+    );
+    res.json("Streak updated");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 // Update the picked status of a capital
 router.put("/:id", async (req, res) => {
   try {

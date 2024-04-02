@@ -10,7 +10,7 @@ exports.up = function (knex) {
     table.string("username").notNullable().unique(); // unique username
     table.string("email").unique(); // unique email
     table.string("password").notNullable(); // password
-    table.integer("streak").defaultTo(0); // a users streak od consecutive correct answers
+    table.integer("streak").defaultTo(0); // a users streak of consecutive correct answers
     table.integer("best").defaultTo(0); // a users best streak of consecutive correct answers
     table.timestamp("created_at").defaultTo(knex.fn.now()); // created_at timestamp
   });
