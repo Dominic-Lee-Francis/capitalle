@@ -1,4 +1,5 @@
 import "./Login.css";
+import { useState } from "react";
 
 const Login = () => {
   const google = () => {
@@ -6,6 +7,34 @@ const Login = () => {
   };
   const github = () => {
     window.open("http://localhost:8080/auth/github", "_self");
+  };
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { username, password };
+      const response = await fetch(
+        "http://localhost:8080/passportLocal/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+      const data = await response.json();
+      if (data.errors) {
+        alert(data.errors);
+      } else {
+        console.log(response);
+        console.log(body);
+        window.location = "/";
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -24,15 +53,27 @@ const Login = () => {
           <div className="line" />
           <div className="or">OR</div>
         </div>
-        <div className="right">
-          <input type="text" placeholder="Username" className="loginInput" />
+        <form className="right" onSubmit={onSubmitForm}>
+          <input
+            type="text"
+            placeholder="Username"
+            className="loginInput"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <input
             type="password"
+            id="password"
             placeholder="Password"
             className="loginInput"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <button className="submit">Login</button>
-        </div>
+        </form>
       </div>
     </div>
   );

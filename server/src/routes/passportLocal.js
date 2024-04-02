@@ -18,4 +18,30 @@ const CLIENT_URL = "http://localhost:3000/";
 //env variables
 const JWT_TOP_SECRET_KEY = process.env.JWT_TOP_SECRET_KEY;
 
+// Passport
+const passport = require("passport");
+
+// Passport Local Strategy
+const LocalStrategy = require("passport-local").Strategy;
+
+// Passport Local Strategy
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    // successful login because the 2nd parm is a user object
+    return done(null, { username: "bob", password: "password" });
+  })
+);
+
+router.post("/login", async (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (!user) {
+      return res.status(400).json({ errors: "Invalid username or password" });
+    }
+
+    if (user) {
+      res.redirect(CLIENT_URL);
+    }
+  })(req, res, next);
+});
+
 module.exports = router;
