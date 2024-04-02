@@ -11,6 +11,7 @@ const pool = require("./db/dbconfig.js");
 
 // client URL for development (will need to change for deployment)
 const CLIENT_URL = "http://localhost:3000/";
+const FAILURE_URL = "http://localhost:3000/rules";
 
 // Google OAuth Strategy
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -110,44 +111,68 @@ passport.use(
 
 // LOCAL LOGIN STRATEGY //
 passport.use(
+  "login",
   new LocalStrategy(
     {
       usernameField: "username",
       passwordField: "password",
     },
-    (username, password, done) => {
-      pool.query(
-        `SELECT * FROM users WHERE username = $1`,
-        [username],
-        (err, results) => {
-          if (err) {
-            throw err;
-          }
-          if (results.rows.length > 0) {
-            const user = results.rows[0];
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-              if (err) {
-                throw err;
-              }
-              if (isMatch) {
-                done(null, user);
-              } else {
-                done(null, false);
-              }
-            });
-          } else {
-            done(null, false);
-          }
+    async (username, password, done) => {
+      // successful login because the 2nd parm is a user object
+      try {
+        console.log("username: ", username);
+        const user = await pool.query(
+          "SELECT * FROM users WHERE username = $1",
+          [username]
+        );
+        if (user.rows.length === 0) {
+          return done(null, false, { message: "User not found" });
         }
-      );
+        const validPassword = await bcrypt.compare(
+          password,
+          user.rows[0].password
+        );
+        if (!validPassword) {
+          return done(null, false, { message: "Incorrect password" });
+        }
+        return done(null, user.rows[0]);
+      } catch (err) {
+        return done(err);
+      }
     }
   )
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+// passport.use(
+//   new LocalStrategy(
+//     {
+//       usernameField: "username",
+//       passwordField: "password",
+//     },
+//     (username, password, done) => {
+//       pool.query(
+//         `SELECT * FROM users WHERE username = $1`,
+//         [username],
+//         (err, results) => {
+//           if (err) {
+//             throw err;
+//           }
+//           if (results.rows.length > 0) {
+//             const user = results.rows[0];
+//             bcrypt.compare(password, user.password, (err, isMatch) => {
+//               if (err) {
+//                 throw err;
+//               }
+//               if (isMatch) {
+//                 done(null, user);
+//               } else {
+//                 done(null, false);
+//               }
+//             });
+//           } else {
+//             done(null, false);
+//           }
+//         }
+//       );
+//     }
+//   )
+// );

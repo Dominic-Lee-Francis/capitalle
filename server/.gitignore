@@ -9,3 +9,6 @@ junk.js
 # token testing
 token.js
 fakeLocalStorage.json
+
+# Sessions
+/sessions

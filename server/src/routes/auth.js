@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
+const passportSetup = require("./../../passport.js");
 
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
@@ -8,6 +9,7 @@ const pool = require("../../db/dbconfig.js");
 // client URL for development (will need to change for deployment)
 const CLIENT_URL = "http://localhost:3000/";
 const REGISTER_URL = "http://localhost:3000/register";
+const FAILURE_URL = "http://localhost:3000/rules";
 
 // REGISTER
 router.post("/register", async (req, res) => {
@@ -123,7 +125,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
+    failureRedirect: FAILURE_URL,
   })
 );
 
@@ -134,19 +136,32 @@ router.get(
   "/github/callback",
   passport.authenticate("github", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
+    failureRedirect: FAILURE_URL,
   })
 );
 
 // Local Strategy
 // Login
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "user has successfully authenticated",
-    user: req.user,
-    successRedirect: CLIENT_URL,
-  });
-});
+router.post(
+  "/login",
+  async (req, res, next) => {
+    next();
+  },
+  (req, res) => {
+    console.log("req.body: ", req.body);
+    passport.authenticate("login", {
+      successRedirect: CLIENT_URL,
+      failureRedirect: FAILURE_URL,
+    });
+  }
+);
+// router.post("/login", passport.authenticate("local"), (req, res) => {
+//   res.status(200).json({
+//     success: true,
+//     message: "user has successfully authenticated",
+//     user: req.user,
+//     successRedirect: CLIENT_URL,
+//   });
+// });
 
 module.exports = router;
