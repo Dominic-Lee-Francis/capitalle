@@ -82,7 +82,7 @@ function App() {
             path="/register"
             element={user ? <Navigate to="/" /> : <Register />}
           />
-          <Route path="/statistics" element={<Statistics />} />
+          <Route path="/statistics" element={<Statistics user={user} />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

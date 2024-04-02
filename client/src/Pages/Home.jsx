@@ -15,37 +15,55 @@ const Home = ({ country }) => {
   // set the capital to the answer from the database
   const [capital, setCapital] = useState("");
 
+  // Feedback message for the user
+  const [feedback, setFeedback] = useState("");
+
+  // Description of capital city
+  const descriptionDB = country.description;
+  const [description, setDescription] = useState("");
+
   // check the answer in the form submission
   const checkAnswer = (e) => {
     e.preventDefault();
     // if the capital is correct, alert the user
     if (capital.toLowerCase() === answer.toLowerCase()) {
-      alert("Correct!");
       // THIS CODE RESETS THE GAME AFTER A CORRECT GUESS. ONLY USED FOR TESTING.
       // TODO - RESET THE GAME EVERY 24 HOURS
-      // setGuesses(6);
-      // setCapital("");
+      setFeedback(
+        `Well done! The capital of ${country.name} is ${answer}! Try again tomorrow!`
+      );
+      setDescription(descriptionDB);
+      setGuesses(0);
     } else {
       // if the capital is incorrect, decrement the guesses by 1
       setGuesses(guesses - 1);
       if (guesses === 6) {
         console.log("First guess");
+        setCapital("");
       }
       if (guesses === 5) {
         console.log("Second guess");
+        setCapital("");
       }
       if (guesses === 4) {
         console.log("Third guess");
+        setCapital("");
       }
       if (guesses === 3) {
         console.log("Fourth guess");
+        setCapital("");
       }
       if (guesses === 2) {
         console.log("Fifth guess");
+        setCapital("");
       }
       if (guesses === 1) {
         // if the guesses reach 0, alert the user with the correct answer
-        alert(`The correct answer was ${answer}`);
+        setFeedback(
+          `Unlucky! The capital of ${country.name} is ${answer}! Try again tomorrow!`
+        );
+        setCapital("");
+        setDescription(descriptionDB);
         // THIS CODE RESETS THE GAME AFTER A CORRECT GUESS. ONLY USED FOR TESTING.
         // TODO - RESET THE GAME EVERY 24 HOURS
         // setGuesses(6);
@@ -60,6 +78,8 @@ const Home = ({ country }) => {
       {country && <h1 className="countryName">{country.name}</h1>}
       <img className="flag" src={country.flag} alt="Todays flag" />
       <h3 className="guessesRemaining">Guesses remaining: {guesses}</h3>
+      {feedback && <h3>{feedback}</h3>}
+      {description && <p>{description}</p>}
       <form className="guessForm" onSubmit={checkAnswer}>
         <input
           className="guessInput"
