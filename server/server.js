@@ -47,10 +47,8 @@ app.use(express.json()); // parse json data req.body
 app.use(
   session({
     genid: (req) => {
-      console.log("1. In genid req.sessionID: ", req.sessionID);
       return uuidv4(); // use UUIDs for session IDs
     },
-    store: new FileStore(),
     secret: EXPRESS_SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
