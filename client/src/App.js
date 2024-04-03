@@ -12,12 +12,25 @@ import Register from "./Pages/Register";
 // React
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+// Loader
+// import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
+  // loading screen
+  // const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 3000);
+  // }, []);
+
   const [user, setUser] = useState(null);
 
   const [country, setCountry] = useState(null);
   useEffect(() => {
+    // Fetch the country data from the server
     const getCountry = async () => {
       fetch("http://localhost:8080/capital", {
         method: "GET",
@@ -37,7 +50,7 @@ function App() {
         });
     };
     getCountry();
-  }, []); // Add an empty dependency array to run the effect only once
+  }, []);
   console.log(country);
 
   useEffect(() => {
