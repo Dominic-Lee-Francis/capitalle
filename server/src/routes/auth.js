@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const passportSetup = require("./../../passport.js");
+const cookieSession = require("cookie-session");
 
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
@@ -116,9 +117,8 @@ router.get("/login/failed", (req, res) => {
 
 // Logout
 router.get("/logout", (req, res) => {
-  req.session.destroy();
-  req.session = null;
   req.logout();
+  req.session = null; // Delete the session
   res.redirect(CLIENT_URL);
 });
 

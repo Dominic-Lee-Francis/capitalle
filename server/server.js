@@ -25,6 +25,10 @@ const cors = require("cors");
 const authRoutes = require("./src/routes/auth.js");
 // capital routes
 const capitalRoutes = require("./src/routes/capital.js");
+// cookie parser
+const cookieParser = require("cookie-parser");
+// cookie session
+const cookieSession = require("cookie-session");
 // Token routes
 // const tokenRoutes = require("./token.js");
 // Passport Local routes
@@ -49,20 +53,30 @@ const JWT_TOP_SECRET_REFRESH_KEY = process.env.JWT_TOP_SECRET_REFRESH_KEY;
 
 // Middleware
 app.use(express.json()); // parse json data req.body
-// express-session middleware
+// cookie parser middleware
+app.use(cookieParser());
+// cookie session middleware
 app.use(
-  session({
-    genid: (req) => {
-      return uuidv4(); // use UUIDs for session IDs
-    },
-    name: "user_sid",
-    secret: EXPRESS_SESSION_SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
-    destroy: true,
+  cookieSession({
+    name: "user_session",
+    keys: [EXPRESS_SESSION_SECRET_KEY],
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
+// express-session middleware
+// app.use(
+//   session({
+//     genid: (req) => {
+//       return uuidv4(); // use UUIDs for session IDs
+//     },
+//     name: "user_sid",
+//     secret: EXPRESS_SESSION_SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+//     destroy: true,
+//   })
+// );
 
 // Session Testing Route
 app.get("/session", (req, res) => {
