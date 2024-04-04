@@ -56,32 +56,34 @@ router.post("/register", async (req, res) => {
         if (results.rows.length > 0) {
           errors.push({ message: "Email is already registered" });
           res.json({ errors });
+        } else {
+          pool.query(
+            `SELECT * FROM users WHERE username = $1`,
+            [username],
+            (err, results) => {
+              if (err) {
+                throw err;
+              }
+              console.log(results.rows);
+              if (results.rows.length > 0) {
+                errors.push({ message: "Username is already registered" });
+                res.json({ errors });
+              } else {
+                pool.query(
+                  `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
+                  [username, email, hashedPassword],
+                  (err, results) => {
+                    if (err) {
+                      throw err;
+                    }
+                    // console.log(results.rows);
+                    res.json(results.rows);
+                  }
+                );
+              }
+            }
+          );
         }
-      }
-    );
-    pool.query(
-      `SELECT * FROM users WHERE username = $1`,
-      [username],
-      (err, results) => {
-        if (err) {
-          throw err;
-        }
-        console.log(results.rows);
-        if (results.rows.length > 0) {
-          errors.push({ message: "Username is already registered" });
-          res.json({ errors });
-        }
-      }
-    );
-    pool.query(
-      `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
-      [username, email, hashedPassword],
-      (err, results) => {
-        if (err) {
-          throw err;
-        }
-        // console.log(results.rows);
-        res.json(results.rows);
       }
     );
   }
