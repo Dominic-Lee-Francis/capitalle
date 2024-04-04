@@ -147,6 +147,53 @@ app.post("/api/login", (req, res) => {
   );
 });
 
+const verifyJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, JWT_TOP_SECRET_KEY, (err, user) => {
+      if (err) {
+        return res.status(403).json({ message: "Token is not valid" });
+      }
+      req.user = user;
+      next();
+    });
+  } else {
+    res.status(401).json({ message: "You failed to authenticate" });
+  }
+};
+
+app.get("/api/user/:id", verifyJWT, (req, res) => {
+  const { id } = req.params;
+  pool.query("SELECT * FROM users WHERE id = $1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json(results.rows);
+  });
+});
+
+// app.delete("/api/user/:id", verifyJWT, (req, res) => {
+//   const { id } = req.params;
+//   pool.query("DELETE FROM users WHERE id = $1", [id], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
+//     res.status(200).send(`User deleted with ID: ${id}`);
+//   });
+// });
+
+// {
+//   jwt.verify(token, JWT_TOP_SECRET_KEY, (err, decoded) => {
+//     if (err) {
+//       res.json({ auth: false, message: "You failed to authenticate" });
+//     } else {
+//       req.username = decoded.username;
+//       next();
+//     }
+//   });
+// }
 // app.post("/api/login", (req, res) => {
 //   const { username, password } = req.body;
 //   pool.query(
