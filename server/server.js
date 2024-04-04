@@ -17,6 +17,8 @@ const flash = require("express-flash");
 const passport = require("passport");
 // bcrypt - password hashing function
 const bcrypt = require("bcrypt");
+// jwt - JSON Web Token implementation
+const jwt = require("jsonwebtoken");
 // cors - middleware for enabling CORS with various options
 const cors = require("cors");
 // auth routes
@@ -37,6 +39,7 @@ const pool = require("./db/dbconfig.js");
 const dotenv = require("dotenv");
 dotenv.config();
 const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
+const JWT_TOP_SECRET_KEY = process.env.JWT_TOP_SECRET_KEY;
 
 // Fake User Data for testing
 // const users = [
@@ -129,7 +132,12 @@ app.post("/api/login", (req, res) => {
             throw err;
           }
           if (isMatch) {
-            res.send("You are logged in");
+            // Generate JWT access token
+            const accessToken = jwt.sign(
+              { username: user.username },
+              process.env.JWT_TOP_SECRET_KEY
+            );
+            res.json({ username: user.username, accessToken });
           } else {
             res.status(401).send("Username or password incorrect!");
           }
