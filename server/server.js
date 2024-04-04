@@ -59,7 +59,8 @@ app.use(
     secret: EXPRESS_SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 10000 }, // CHANGe
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+    destroy: true,
   })
 );
 
@@ -86,12 +87,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  console.log("serializeUser user: ", user);
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log("deserializeUser user: ", user);
   done(null, user);
 });
 

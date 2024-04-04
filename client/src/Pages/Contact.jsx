@@ -9,7 +9,7 @@ const Contact = () => {
           <img
             className="profilePictureContact"
             src="./images/profile_picture.jpg"
-            alt="picture of the developer: Dominic"
+            alt="Developer: Dominic"
           />
         </div>
         <div className="contactCentre"></div>

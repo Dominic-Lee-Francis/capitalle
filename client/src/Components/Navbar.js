@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const Navbar = ({ user }) => {
   const logout = async () => {
     // Redirect to the logout URL
     window.open("http://localhost:8080/auth/logout", "_self");
+    sessionStorage.clear();
+    cookies.remove("accessToken");
+    cookies.remove("refreshToken");
+    user = null;
   };
 
   return (
