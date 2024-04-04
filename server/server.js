@@ -15,6 +15,8 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 // passport - authentication middleware for Node.js
 const passport = require("passport");
+// bcrypt - password hashing function
+const bcrypt = require("bcrypt");
 // cors - middleware for enabling CORS with various options
 const cors = require("cors");
 // auth routes
@@ -110,6 +112,58 @@ app.use("/capital", capitalRoutes);
 
 // Token routes
 // app.use("/token", tokenRoutes);
+
+app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
+  pool.query(
+    "SELECT * FROM users WHERE username = $1",
+    [username],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      const user = results.rows[0];
+      if (user) {
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+          if (err) {
+            throw err;
+          }
+          if (isMatch) {
+            res.send("You are logged in");
+          } else {
+            res.status(401).send("Username or password incorrect!");
+          }
+        });
+      }
+    }
+  );
+});
+
+// app.post("/api/login", (req, res) => {
+//   const { username, password } = req.body;
+//   pool.query(
+//     "SELECT * FROM users WHERE username = $1",
+//     [username],
+//     (error, results) => {
+//       if (error) {
+//         throw error;
+//       }
+//       const user = results.rows[0];
+//       if (user) {
+//         bcrypt.compare(password, user.password, (err, isMatch) => {
+//           if (err) {
+//             throw err;
+//           }
+//           if (isMatch) {
+//             res.send("You are logged in");
+//           } else {
+//             res.status(401).send("Username or password incorrect!");
+//           }
+//         });
+//       }
+//     }
+//   );
+// });
 
 // Server setup
 app.listen(8080, () => {
