@@ -39,7 +39,8 @@ const pool = require("./db/dbconfig.js");
 const dotenv = require("dotenv");
 dotenv.config();
 const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
-const JWT_TOP_SECRET_KEY = process.env.JWT_TOP_SECRET_KEY;
+const JWT_TOP_SECRET_ACCESS_KEY = process.env.JWT_TOP_SECRET_ACCESS_KEY;
+const JWT_TOP_SECRET_REFRESH_KEY = process.env.JWT_TOP_SECRET_REFRESH_KEY;
 
 // Fake User Data for testing
 // const users = [
@@ -116,6 +117,50 @@ app.use("/capital", capitalRoutes);
 // Token routes
 // app.use("/token", tokenRoutes);
 
+let refreshTokens = [];
+
+app.post("/api/refresh", (req, res) => {
+  // Get the refresh token from the user
+  const refreshToken = req.body.token;
+
+  // Check if the refresh token is valid
+  if (!refreshToken) return res.status(401).json("You are not authenticated");
+  if (!refreshTokens.includes(refreshToken)) {
+    return res.status(403).json("Refresh token is not valid");
+  }
+  jwt.verify(refreshToken, JWT_TOP_SECRET_REFRESH_KEY, (err, user) => {
+    err && console.log(err);
+    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+
+    const newAccessToken = generateAccessToken({ username: user.username });
+    const newRefreshToken = generateRefreshToken({ username: user.username });
+
+    refreshTokens.push(newRefreshToken);
+
+    res.status(200).json({
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    });
+  });
+});
+
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    { username: user.username },
+    process.env.JWT_TOP_SECRET_ACCESS_KEY,
+    {
+      expiresIn: "15m",
+    }
+  );
+};
+
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { username: user.username },
+    process.env.JWT_TOP_SECRET_REFRESH_KEY
+  );
+};
+
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   pool.query(
@@ -133,11 +178,11 @@ app.post("/api/login", (req, res) => {
           }
           if (isMatch) {
             // Generate JWT access token
-            const accessToken = jwt.sign(
-              { username: user.username },
-              process.env.JWT_TOP_SECRET_KEY
-            );
-            res.json({ username: user.username, accessToken });
+            const accessToken = generateAccessToken(user);
+            // Generate JWT refresh token
+            const refreshToken = generateRefreshToken(user);
+            refreshTokens.push(refreshToken);
+            res.json({ username: user.username, accessToken, refreshToken });
           } else {
             res.status(401).send("Username or password incorrect!");
           }
@@ -152,7 +197,7 @@ const verifyJWT = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, JWT_TOP_SECRET_KEY, (err, user) => {
+    jwt.verify(token, JWT_TOP_SECRET_ACCESS_KEY, (err, user) => {
       if (err) {
         return res.status(403).json({ message: "Token is not valid" });
       }
@@ -163,6 +208,13 @@ const verifyJWT = (req, res, next) => {
     res.status(401).json({ message: "You failed to authenticate" });
   }
 };
+
+// LOGOUT
+app.post("/api/logout", verifyJWT, (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  res.status(200).json("You logged out successfully");
+});
 
 app.get("/api/user/:id", verifyJWT, (req, res) => {
   const { id } = req.params;
