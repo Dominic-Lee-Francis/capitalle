@@ -115,8 +115,10 @@ router.get("/login/failed", (req, res) => {
 });
 
 // Logout
+// Logout
 router.get("/logout", (req, res) => {
   req.logout();
+  req.session.destroy(); // Delete the session
   res.redirect(CLIENT_URL);
 });
 

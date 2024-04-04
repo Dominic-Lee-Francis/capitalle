@@ -3,6 +3,7 @@ import "./Navbar.css";
 
 const Navbar = ({ user }) => {
   const logout = async () => {
+    // Redirect to the logout URL
     window.open("http://localhost:8080/auth/logout", "_self");
   };
 

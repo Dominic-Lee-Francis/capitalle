@@ -58,6 +58,11 @@ const Login = () => {
         password,
       });
       setUser(response.data);
+      // Store user data in a cookie or local storage
+      // Example using cookies:
+      document.cookie = `user=${JSON.stringify(response.data)}; path=/`;
+      // Example using local storage:
+      localStorage.setItem("user", JSON.stringify(response.data));
     } catch (err) {
       console.error(err);
     }

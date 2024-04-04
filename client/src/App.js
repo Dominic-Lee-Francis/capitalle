@@ -46,6 +46,31 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Fetch the user data from the server
+    const getUser = async () => {
+      axios
+        .get("http://localhost:8080/auth/login/success", {
+          withCredentials: true,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) return response.data;
+          throw new Error("Failed to authenticate user");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getUser();
+  }, []);
+
+  useEffect(() => {
     const checkUserAuthentication = async () => {
       const token = localStorage.getItem("token");
       if (token) {
