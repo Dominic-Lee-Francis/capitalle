@@ -226,51 +226,9 @@ app.get("/api/user/:id", verifyJWT, (req, res) => {
   });
 });
 
-// app.delete("/api/user/:id", verifyJWT, (req, res) => {
-//   const { id } = req.params;
-//   pool.query("DELETE FROM users WHERE id = $1", [id], (error, results) => {
-//     if (error) {
-//       throw error;
-//     }
-//     res.status(200).send(`User deleted with ID: ${id}`);
-//   });
-// });
-
-// {
-//   jwt.verify(token, JWT_TOP_SECRET_KEY, (err, decoded) => {
-//     if (err) {
-//       res.json({ auth: false, message: "You failed to authenticate" });
-//     } else {
-//       req.username = decoded.username;
-//       next();
-//     }
-//   });
-// }
-// app.post("/api/login", (req, res) => {
-//   const { username, password } = req.body;
-//   pool.query(
-//     "SELECT * FROM users WHERE username = $1",
-//     [username],
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
-//       const user = results.rows[0];
-//       if (user) {
-//         bcrypt.compare(password, user.password, (err, isMatch) => {
-//           if (err) {
-//             throw err;
-//           }
-//           if (isMatch) {
-//             res.send("You are logged in");
-//           } else {
-//             res.status(401).send("Username or password incorrect!");
-//           }
-//         });
-//       }
-//     }
-//   );
-// });
+app.get("/api/users/me", verifyJWT, (req, res) => {
+  res.status(200).json(req.user);
+});
 
 // Server setup
 app.listen(8080, () => {

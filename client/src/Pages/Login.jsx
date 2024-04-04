@@ -1,5 +1,7 @@
 import "./Login.css";
+import axios from "axios";
 import { useState } from "react";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const google = () => {
@@ -9,35 +11,64 @@ const Login = () => {
     window.open("http://localhost:8080/auth/github", "_self");
   };
 
+  const [user, setUser] = useState(null); // { username: "", password: "" }
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [errors, setErrors] = useState([]);
+
+  const BASE_API_URL = "http://localhost:8080/api/";
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.post(`${BASE_API_URL}refresh`, {
+        token: user.refreshToken,
+      });
+      setUser({
+        ...user,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+      });
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const axiosJWT = axios.create();
+
+  axiosJWT.interceptors.request.use(
+    async (config) => {
+      let currentDate = new Date();
+      const decodedToken = jwt_decode(user.accessToken);
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        const data = await refreshToken();
+        config.headers["authorization"] = `Bearer ${data.accessToken}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { username, password };
-      const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+      const response = await axios.post(`${BASE_API_URL}login`, {
+        username,
+        password,
       });
-      const data = await response.json();
-      if (data.errors) {
-        alert(data.errors);
-      } else {
-        console.log(response);
-        console.log(body);
-        window.location = "/";
-      }
+      setUser(response.data);
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
     }
   };
 
   return (
     <div className="login">
-      <h1 className="loginTitle">Choose a Login Method</h1>
+      <h1 className="loginTitle">
+        Choose a Login Method
+        {user && <div>Welcome, {user.username}!</div>}
+      </h1>
       <div className="wrapper">
         <div className="left">
           <div className="loginButton google" onClick={google}>
