@@ -15,7 +15,20 @@ import { useEffect, useState } from "react";
 // Loader
 // import ClipLoader from "react-spinners/ClipLoader";
 
+const BASE_URL = "http://localhost:8080";
+
 function App() {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const response = await fetch(`${BASE_URL}/capital`);
+      const countries = await response.json();
+      setCountries(countries);
+    };
+    fetchCountries();
+  }, []);
+
   // loading screen
   // const [loading, setLoading] = useState(false);
 
@@ -28,65 +41,40 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  const [country, setCountry] = useState(null);
-  useEffect(() => {
-    // Fetch the country data from the server
-    const getCountry = async () => {
-      fetch("http://localhost:8080/capital", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("failed to authenticate user");
-        })
-        .then((resObject) => {
-          setCountry(resObject);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getCountry();
-  }, []);
-  console.log(country);
+  // useEffect(() => {
+  //   // Fetch the user data from the server
+  //   const getUser = async () => {
+  //     fetch("http://localhost:8080/auth/login/success", {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Credentials": true,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response.status === 200) return response.json();
+  //         throw new Error("failed to authenticate user");
+  //       })
+  //       .then((resObject) => {
+  //         setUser(resObject.user);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
+  //   getUser();
+  // }, []);
 
-  useEffect(() => {
-    // Fetch the user data from the server
-    const getUser = async () => {
-      fetch("http://localhost:8080/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("failed to authenticate user");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getUser();
-  }, []);
-
-  console.log(user);
+  // console.log(user);
 
   return (
     <BrowserRouter>
       <div className="App">
         <Navbar user={user} />
         <Routes>
-          <Route path="/" element={<Home country={country} user={user} />} />
+          <Route path="/" element={<Home country={countries} user={user} />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
