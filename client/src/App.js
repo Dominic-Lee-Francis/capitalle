@@ -18,6 +18,10 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import axios from "axios";
 // jwt-decode
 import jwt_decode from "jwt-decode";
+// universal-cookie
+import Cookies from "universal-cookie";
+// react cookies
+import { CookiesProvider, useCookies } from "react-cookie";
 
 const BASE_URL = "http://localhost:8080";
 
@@ -107,69 +111,48 @@ function App() {
     }
   );
 
-  // useEffect(() => {
-  //   const checkUserAuthentication = async () => {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       try {
-  //         const response = await fetch(`${BASE_URL}/api/users/`, {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         });
-  //         if (!response.ok) {
-  //           throw new Error("Failed to authenticate user");
-  //         }
-  //         const user = await response.json();
-  //         setUser(user);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   };
-  //   checkUserAuthentication();
-  // }, []);
-
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar user={user} />
-        <div className="loadingDiv">
-          {isLoading ? (
-            <ClimbingBoxLoader
-              className="loader"
-              color="green"
-              loading={isLoading}
-              size={50}
-            />
-          ) : (
-            <>
-              {error && <div className="error">{error}</div>}
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home country={countries} user={user} />}
-                />
-                <Route
-                  path="/login"
-                  element={user ? <Navigate to="/" /> : <Login />}
-                />
-                <Route
-                  path="/register"
-                  element={user ? <Navigate to="/" /> : <Register />}
-                />
-                <Route
-                  path="/statistics"
-                  element={<Statistics user={user} />}
-                />
-                <Route path="/rules" element={<Rules />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </>
-          )}
+    <CookiesProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar user={user} />
+          <div className="loadingDiv">
+            {isLoading ? (
+              <ClimbingBoxLoader
+                className="loader"
+                color="green"
+                loading={isLoading}
+                size={50}
+              />
+            ) : (
+              <>
+                {error && <div className="error">{error}</div>}
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<Home country={countries} user={user} />}
+                  />
+                  <Route
+                    path="/login"
+                    element={user ? <Navigate to="/" /> : <Login />}
+                  />
+                  <Route
+                    path="/register"
+                    element={user ? <Navigate to="/" /> : <Register />}
+                  />
+                  <Route
+                    path="/statistics"
+                    element={<Statistics user={user} />}
+                  />
+                  <Route path="/rules" element={<Rules />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CookiesProvider>
   );
 }
 
