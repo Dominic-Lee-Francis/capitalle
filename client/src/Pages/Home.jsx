@@ -23,8 +23,8 @@ const Home = ({ country }) => {
   const [description, setDescription] = useState("");
 
   // was user correct or not
+  // eslint-disable-next-line
   const [correct, setCorrect] = useState(false);
-  console.log(correct);
 
   // check the answer in the form submission
   const checkAnswer = (e) => {

@@ -13,80 +13,74 @@ import Register from "./Pages/Register";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 // Loader
-// import ClipLoader from "react-spinners/ClipLoader";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const BASE_URL = "http://localhost:8080";
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await fetch(`${BASE_URL}/capital`);
-      const countries = await response.json();
-      setCountries(countries);
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${BASE_URL}/capital`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch countries");
+        }
+        const countries = await response.json();
+        setCountries(countries);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchCountries();
   }, []);
 
-  // loading screen
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  // }, []);
-
-  const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   // Fetch the user data from the server
-  //   const getUser = async () => {
-  //     fetch("http://localhost:8080/auth/login/success", {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Credentials": true,
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (response.status === 200) return response.json();
-  //         throw new Error("failed to authenticate user");
-  //       })
-  //       .then((resObject) => {
-  //         setUser(resObject.user);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
-  //   getUser();
-  // }, []);
-
-  // console.log(user);
+  const [users, setUsers] = useState(null);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar user={user} />
-        <Routes>
-          <Route path="/" element={<Home country={countries} user={user} />} />
-          <Route
-            path="/login"
-            element={user ? <Navigate to="/" /> : <Login />}
-          />
-          <Route
-            path="/register"
-            element={user ? <Navigate to="/" /> : <Register />}
-          />
-          <Route path="/statistics" element={<Statistics user={user} />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Navbar user={users} />
+        <div className="loadingDiv">
+          {isLoading ? (
+            <ClimbingBoxLoader
+              className="loader"
+              color="green"
+              loading={isLoading}
+              size={50}
+            />
+          ) : (
+            <>
+              {error && <div className="error">{error}</div>}
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home country={countries} user={users} />}
+                />
+                <Route
+                  path="/login"
+                  element={users ? <Navigate to="/" /> : <Login />}
+                />
+                <Route
+                  path="/register"
+                  element={users ? <Navigate to="/" /> : <Register />}
+                />
+                <Route
+                  path="/statistics"
+                  element={<Statistics user={users} />}
+                />
+                <Route path="/rules" element={<Rules />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </>
+          )}
+        </div>
       </div>
     </BrowserRouter>
   );
