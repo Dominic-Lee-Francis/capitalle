@@ -10,8 +10,10 @@ import Rules from "./Pages/Rules";
 import Contact from "./Pages/Contact";
 import Register from "./Pages/Register";
 // React
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+// redux
+import { useSelector } from "react-redux";
 // Loader
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 // axios
@@ -24,6 +26,12 @@ import Cookies from "universal-cookie";
 import { CookiesProvider, useCookies } from "react-cookie";
 
 const BASE_URL = "http://localhost:8080";
+
+// REDUX TESTING
+// function RequiredAuth({ children, redirectTo }) {
+//   let isAuthenticated = useSelector((state) => state.isAuthenticated);
+//   return isAuthenticated ? children : <Navigate to={redirectTo} />;
+// }
 
 function App() {
   const [countries, setCountries] = useState([]);
