@@ -4,7 +4,7 @@
 .env
 
 # testing code
-junk.js
+oldcode.js
 
 # token testing
 token.js

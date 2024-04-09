@@ -45,7 +45,7 @@ exports.seed = async function (knex) {
     {
       name: "Andorra",
       capital: "Andorra la Vella",
-      flag: "https://flagcdn.com/ad.png",
+      flag: "https://flagcdn.com/ad.svg",
       description:
         "Andorra la Vella is the capital of the Principality of Andorra. It is known for its picturesque beauty, charming old town, and tax-free shopping. The city is surrounded by stunning mountains and offers various outdoor activities, such as hiking and skiing. Fun fact: Andorra la Vella is one of the highest capital cities in Europe, located at an elevation of 3,356 feet (1,023 meters) above sea level.",
       hint1: "This capital is located in the Pyrenees mountains",

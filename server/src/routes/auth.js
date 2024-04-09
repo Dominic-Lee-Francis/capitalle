@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const passportSetup = require("./../../passport.js");
-const cookieSession = require("cookie-session");
 
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
@@ -143,29 +141,5 @@ router.get(
     failureRedirect: FAILURE_URL,
   })
 );
-
-// Local Strategy
-// Login
-router.post(
-  "/login",
-  async (req, res, next) => {
-    next();
-  },
-  (req, res) => {
-    console.log("req.body: ", req.body);
-    passport.authenticate("login", {
-      successRedirect: CLIENT_URL,
-      failureRedirect: FAILURE_URL,
-    });
-  }
-);
-// router.post("/login", passport.authenticate("local"), (req, res) => {
-//   res.status(200).json({
-//     success: true,
-//     message: "user has successfully authenticated",
-//     user: req.user,
-//     successRedirect: CLIENT_URL,
-//   });
-// });
 
 module.exports = router;

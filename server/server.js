@@ -1,16 +1,6 @@
 // Modules
 // express - web framework for Node.js
 const express = require("express");
-// express-session - session middleware for Express
-const session = require("express-session");
-// uuid - simple, fast generation of RFC4122 UUIDS
-const { v4: uuidv4 } = require("uuid");
-// FileStore - file store for Express session
-const FileStore = require("session-file-store")(session);
-// path - module for working with file paths _______ REMOVE MAYBE
-const path = require("path");
-// body-parser - middleware for parsing JSON and urlencoded data REMOVE MAYBE
-const bodyParser = require("body-parser");
 // flash - flash messages for Express
 const flash = require("express-flash");
 // passport - authentication middleware for Node.js
@@ -29,10 +19,6 @@ const capitalRoutes = require("./src/routes/capital.js");
 const cookieParser = require("cookie-parser");
 // cookie session
 const cookieSession = require("cookie-session");
-// Token routes
-// const tokenRoutes = require("./token.js");
-// Passport Local routes
-// const passportLocalRoutes = require("./src/routes/passportLocal.js");
 // Server setup
 const app = express();
 
@@ -46,11 +32,6 @@ const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
 const JWT_TOP_SECRET_ACCESS_KEY = process.env.JWT_TOP_SECRET_ACCESS_KEY;
 const JWT_TOP_SECRET_REFRESH_KEY = process.env.JWT_TOP_SECRET_REFRESH_KEY;
 
-// Fake User Data for testing
-// const users = [
-//   { id: 1, username: "bob", email: "bob@bob", password: "password" },
-// ];
-
 // Middleware
 app.use(express.json()); // parse json data req.body
 // cookie parser middleware
@@ -63,29 +44,6 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
-// express-session middleware
-// app.use(
-//   session({
-//     genid: (req) => {
-//       return uuidv4(); // use UUIDs for session IDs
-//     },
-//     name: "user_sid",
-//     secret: EXPRESS_SESSION_SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
-//     destroy: true,
-//   })
-// );
-
-// Session Testing Route
-app.get("/session", (req, res) => {
-  console.log("get / req.sessionID: ", req.session);
-  console.log("req.session.user: ", req.session.user);
-  req.session.user = users[0];
-  console.log("req.session ", req.session);
-  res.send(`Session ID: ${req.sessionID}`);
-});
 
 // flash middleware
 app.use(flash());
@@ -121,14 +79,8 @@ app.use(
 // Auth routes
 app.use("/auth", authRoutes);
 
-// Passport Local routes
-// app.use("/passportLocal", passportLocalRoutes);
-
 // Capital routes
 app.use("/capital", capitalRoutes);
-
-// Token routes
-// app.use("/token", tokenRoutes);
 
 let refreshTokens = [];
 
@@ -226,6 +178,7 @@ const verifyJWT = (req, res, next) => {
 app.post("/api/logout", verifyJWT, (req, res) => {
   const refreshToken = req.body.token;
   refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  res.clearCookie("user_session");
   res.status(200).json("You logged out successfully");
 });
 
