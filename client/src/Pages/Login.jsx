@@ -5,58 +5,26 @@ import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const google = () => {
-    window.open("http://localhost:8080/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_SERVER_URL}/auth/google`, "_self");
   };
   const github = () => {
-    window.open("http://localhost:8080/auth/github", "_self");
+    window.open(`${process.env.REACT_APP_SERVER_URL}/auth/github`, "_self");
   };
 
   const [user, setUser] = useState(null); // { username: "", password: "" }
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const BASE_API_URL = "http://localhost:8080/api/";
-
-  // const refreshToken = async () => {
-  //   try {
-  //     const response = await axios.post(`${BASE_API_URL}refresh`, {
-  //       token: user.refreshToken,
-  //     });
-  //     setUser({
-  //       ...user,
-  //       accessToken: response.data.accessToken,
-  //       refreshToken: response.data.refreshToken,
-  //     });
-  //     return response.data;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  // const axiosJWT = axios.create();
-
-  // axiosJWT.interceptors.request.use(
-  //   async (config) => {
-  //     let currentDate = new Date();
-  //     const decodedToken = jwt_decode(user.accessToken);
-  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-  //       const data = await refreshToken();
-  //       config.headers["authorization"] = `Bearer ${data.accessToken}`;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${BASE_API_URL}login`, {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/login`,
+        {
+          username,
+          password,
+        }
+      );
       setUser(response.data);
       // Store user data in a cookie or local storage
       // Example using cookies:

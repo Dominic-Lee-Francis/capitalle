@@ -21,7 +21,7 @@ import jwt_decode from "jwt-decode";
 // react cookies
 import { CookiesProvider } from "react-cookie";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -70,7 +70,7 @@ function App() {
     // Fetch the user data from the server
     const getUser = async () => {
       axios
-        .get("http://localhost:8080/auth/login/success", {
+        .get(`${BASE_URL}/auth/login/success`, {
           withCredentials: true,
           headers: {
             Accept: "application/json",
@@ -91,11 +91,9 @@ function App() {
     getUser();
   }, []);
 
-  const BASE_API_URL = "http://localhost:8080/api/";
-
   const refreshToken = async () => {
     try {
-      const response = await axios.post(`${BASE_API_URL}refresh`, {
+      const response = await axios.post(`${BASE_URL}/api/refresh`, {
         token: user.refreshToken,
       });
       setUser({
