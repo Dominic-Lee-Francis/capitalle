@@ -49,6 +49,14 @@ function App() {
 
   const [user, setUser] = useState(null);
 
+  const token = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (token) {
+      setUser(jwt_decode(token));
+    }
+  }, []);
+
   useEffect(() => {
     // Fetch the user data from the server
     const getUser = async () => {
