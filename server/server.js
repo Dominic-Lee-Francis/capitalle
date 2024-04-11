@@ -114,7 +114,7 @@ const generateAccessToken = (user) => {
     { username: user.username },
     process.env.JWT_TOP_SECRET_ACCESS_KEY,
     {
-      expiresIn: "15m",
+      expiresIn: "5m",
     }
   );
 };
@@ -176,6 +176,7 @@ const verifyJWT = (req, res, next) => {
 
 // LOGOUT
 app.post("/api/logout", verifyJWT, (req, res) => {
+  console.log("logout");
   const refreshToken = req.body.token;
   refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
   res.clearCookie("user_session");

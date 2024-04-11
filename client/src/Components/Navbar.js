@@ -1,16 +1,31 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Cookies from "universal-cookie";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const cookies = new Cookies();
 
 const Navbar = ({ user }) => {
   const logout = async () => {
+    // axios post to the logout URL
+    await axios
+      .post("http://localhost:8080/api/logout")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     // Redirect to the logout URL
     window.open("http://localhost:8080/auth/logout", "_self");
+
+    // Clear the session storage, cookies, and local storage
     sessionStorage.clear();
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
+    localStorage.removeItem("user");
     user = null;
   };
 

@@ -49,12 +49,21 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  const token = localStorage.getItem("user");
-
   useEffect(() => {
+    const token = localStorage.getItem("user");
     if (token) {
       setUser(jwt_decode(token));
     }
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const token = localStorage.getItem("user");
+      if (token) {
+        setUser(jwt_decode(token));
+      }
+    }, 1000); // Change the interval time as per your requirement
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import "./Login.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
 const Login = () => {
@@ -17,38 +17,38 @@ const Login = () => {
 
   const BASE_API_URL = "http://localhost:8080/api/";
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.post(`${BASE_API_URL}refresh`, {
-        token: user.refreshToken,
-      });
-      setUser({
-        ...user,
-        accessToken: response.data.accessToken,
-        refreshToken: response.data.refreshToken,
-      });
-      return response.data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const refreshToken = async () => {
+  //   try {
+  //     const response = await axios.post(`${BASE_API_URL}refresh`, {
+  //       token: user.refreshToken,
+  //     });
+  //     setUser({
+  //       ...user,
+  //       accessToken: response.data.accessToken,
+  //       refreshToken: response.data.refreshToken,
+  //     });
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  const axiosJWT = axios.create();
+  // const axiosJWT = axios.create();
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date();
-      const decodedToken = jwt_decode(user.accessToken);
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        const data = await refreshToken();
-        config.headers["authorization"] = `Bearer ${data.accessToken}`;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(user.accessToken);
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       config.headers["authorization"] = `Bearer ${data.accessToken}`;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -67,6 +67,14 @@ const Login = () => {
       console.error(err);
     }
   };
+
+  const token = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (token) {
+      setUser(jwt_decode(token));
+    }
+  }, []);
 
   return (
     <div className="login">
