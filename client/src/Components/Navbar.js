@@ -23,8 +23,7 @@ const Navbar = ({ user }) => {
 
     // Clear the session storage, cookies, and local storage
     sessionStorage.clear();
-    cookies.remove("accessToken");
-    cookies.remove("refreshToken");
+    cookies.remove("user");
     localStorage.removeItem("user");
     user = null;
   };
