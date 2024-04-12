@@ -32,7 +32,7 @@ function App() {
     const fetchCountries = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${BASE_URL}/capital`);
+        const response = await fetch(`${BASE_URL}/capital/today`);
         if (!response.ok) {
           throw new Error("Failed to fetch countries");
         }

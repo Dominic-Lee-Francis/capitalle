@@ -7,12 +7,26 @@ const pool = require("../../db/dbconfig.js");
 const CLIENT_URL = "http://localhost:3000/";
 
 // Get a random capital
+// TEST CODE - NOT USED IN DEPLOYMENT - USED FOR TESTING PURPOSES
 router.get("/", async (req, res) => {
   try {
     const randomCapital = await pool.query(
       "SELECT * FROM countries WHERE picked = false ORDER BY RANDOM() LIMIT 1"
     );
     res.json(randomCapital.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// Get a capital assigned todays date under 'challenge_date'
+// DEPLOYMENT CODE - USED IN DEPLOYMENT
+router.get("/today", async (req, res) => {
+  try {
+    const todayCapital = await pool.query(
+      "SELECT * FROM countries WHERE challenge_date = CURRENT_DATE"
+    );
+    res.json(todayCapital.rows[0]);
   } catch (error) {
     console.error(error.message);
   }
@@ -27,20 +41,6 @@ router.put("/updateStreak", async (req, res) => {
       [user.id]
     );
     res.json("Streak updated");
-  } catch (error) {
-    console.error(error.message);
-  }
-});
-
-// Update the picked status of a capital
-router.put("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updateCapital = await pool.query(
-      "UPDATE countries SET picked = true WHERE id = $1",
-      [id]
-    );
-    res.json("Capital updated");
   } catch (error) {
     console.error(error.message);
   }
