@@ -3,9 +3,6 @@ const router = require("express").Router();
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
 
-// client URL for development (will need to change for deployment)
-const CLIENT_URL = "http://localhost:3000/";
-
 // Get a random capital
 // TEST CODE - NOT USED IN DEPLOYMENT - USED FOR TESTING PURPOSES
 router.get("/", async (req, res) => {
