@@ -1,7 +1,8 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
-const Home = ({ country }) => {
+const Home = ({ country, user }) => {
   // get the capital from the country object in the database
   const answer = country.capital;
   // set the number of guesses to 6
@@ -31,14 +32,14 @@ const Home = ({ country }) => {
     e.preventDefault();
     // if the capital is correct, alert the user
     if (capital.toLowerCase() === answer.toLowerCase()) {
-      // THIS CODE RESETS THE GAME AFTER A CORRECT GUESS. ONLY USED FOR TESTING.
-      // TODO - RESET THE GAME EVERY 24 HOURS
       setFeedback(
         `Well done! The capital of ${country.name} is ${answer}! Try again tomorrow!`
       );
       setDescription(descriptionDB);
       setGuesses(0);
       setCorrect(true);
+      // run server side code to update the user's 'quiz_completed_today' column to true
+      axios.put("/capital/quizCompleted", { user });
     } else {
       // if the capital is incorrect, decrement the guesses by 1
       setGuesses(guesses - 1);
@@ -70,6 +71,8 @@ const Home = ({ country }) => {
         setCapital("");
         setDescription(descriptionDB);
         setCorrect(false);
+        // run server side code to update the user's 'quiz_completed_today' column to true
+        axios.put("/capital/quizCompleted", { user });
         // THIS CODE RESETS THE GAME AFTER A CORRECT GUESS. ONLY USED FOR TESTING.
         // TODO - RESET THE GAME EVERY 24 HOURS
         // setGuesses(6);

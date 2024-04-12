@@ -91,6 +91,7 @@ router.post("/login", (req, res) => {
               username: user.username,
               streak: user.streak,
               best: user.best,
+              quiz_completed_today: user.quiz_completed_today,
               accessToken,
               refreshToken,
             });

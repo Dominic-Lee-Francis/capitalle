@@ -12,6 +12,8 @@ exports.up = function (knex) {
     table.string("password").notNullable(); // password
     table.integer("streak").defaultTo(0); // a users streak of consecutive correct answers
     table.integer("best").defaultTo(0); // a users best streak of consecutive correct answers
+    table.date("todays_date").defaultTo(new Date().toISOString().split("T")[0]); // the date of the users current quiz
+    table.boolean("quiz_completed_today").defaultTo(false); // whether the user has completed the quiz today
     table.timestamp("created_at").defaultTo(knex.fn.now()); // created_at timestamp
   });
 };
