@@ -4,10 +4,9 @@
 .env
 
 # testing code
-oldcode.js
+
 
 # token testing
-token.js
 fakeLocalStorage.json
 
 # Sessions
