@@ -147,7 +147,14 @@ app.post("/api/login", (req, res) => {
             // Generate JWT refresh token
             const refreshToken = generateRefreshToken(user);
             refreshTokens.push(refreshToken);
-            res.json({ username: user.username, accessToken, refreshToken });
+            res.json({
+              id: user.id,
+              username: user.username,
+              streak: user.streak,
+              best: user.best,
+              accessToken,
+              refreshToken,
+            });
           } else {
             res.status(401).send("Username or password incorrect!");
           }
