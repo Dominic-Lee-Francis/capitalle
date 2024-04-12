@@ -1,6 +1,7 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const Home = ({ country, user }) => {
   // get the capital from the country object in the database
@@ -40,6 +41,10 @@ const Home = ({ country, user }) => {
       setCorrect(true);
       // run server side code to update the user's 'quiz_completed_today' column to true
       axios.put("/capital/quizCompleted", { user });
+      // increment the streak column in the users table by 1
+      axios.put("/capital/incrementStreak", { user });
+      // update the best streak column in the users table if the current streak is greater than the best streak
+      axios.put("/capital/updateBestStreak", { user });
     } else {
       // if the capital is incorrect, decrement the guesses by 1
       setGuesses(guesses - 1);
@@ -73,6 +78,8 @@ const Home = ({ country, user }) => {
         setCorrect(false);
         // run server side code to update the user's 'quiz_completed_today' column to true
         axios.put("/capital/quizCompleted", { user });
+        // reset the streak column in the users table to 0
+        axios.put("/capital/resetStreak", { user });
         // THIS CODE RESETS THE GAME AFTER A CORRECT GUESS. ONLY USED FOR TESTING.
         // TODO - RESET THE GAME EVERY 24 HOURS
         // setGuesses(6);

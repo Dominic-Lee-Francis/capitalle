@@ -60,15 +60,58 @@ cron.schedule("0 0 * * *", async () => {
   }
 });
 
-// update the streak of a user
-router.put("/updateStreak", async (req, res) => {
+// increment the streak column in the users table by 1
+router.put("/incrementStreak", async (req, res) => {
   try {
     const { user } = req.body;
-    const updateStreak = await pool.query(
-      "UPDATE users SET streak = streak + 1 WHERE id = $1",
-      [user.id]
+    const incrementStreak = await pool.query(
+      "UPDATE users SET streak = streak + 1 WHERE username = $1",
+      [user.username]
     );
-    res.json("Streak updated");
+    res.json("Streak incremented");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// reset the streak column in the users table to 0
+router.put("/resetStreak", async (req, res) => {
+  try {
+    const { user } = req.body;
+    const resetStreak = await pool.query(
+      "UPDATE users SET streak = 0 WHERE username = $1",
+      [user.username]
+    );
+    res.json("Streak reset");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// update best streak column in the users table if the current streak is greater than the best streak
+router.put("/updateBestStreak", async (req, res) => {
+  try {
+    const { user } = req.body;
+    const updateBestStreak = await pool.query(
+      "UPDATE users SET best_streak = streak WHERE username = $1",
+      [user.username]
+    );
+    res.json("Best streak updated");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// check to see if the user has completed the quiz today by checking the 'quiz_completed_today' column if it is
+// true they have completed the quiz, if it is false they have not
+router.get("/checkQuiz", async (req, res) => {
+  try {
+    const checkQuiz = await pool.query(
+      "SELECT quiz_completed_today FROM users WHERE username = $1",
+      [req.user?.username]
+    );
+    console.log(req.user?.username);
+    res.json(checkQuiz.rows[0]);
   } catch (error) {
     console.error(error.message);
   }
