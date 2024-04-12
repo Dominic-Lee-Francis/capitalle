@@ -5,6 +5,24 @@
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("countries").del();
+  const startDate = new Date("2024-04-12");
+  const endDate = new Date("2024-05-08");
+  const dates = [];
+
+  for (
+    let date = startDate;
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    dates.push(new Date(date));
+  }
+
+  // Shuffle the dates array
+  for (let i = dates.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [dates[i], dates[j]] = [dates[j], dates[i]];
+  }
+
   await knex("countries").insert([
     {
       name: "Afghanistan",
@@ -17,6 +35,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'l'",
       hint4: "This capital begins with a 'K'",
       hint5: "This capital is 5 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Albania",
@@ -29,6 +48,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'a'",
       hint4: "This capital begins with a 'T'",
       hint5: "This capital is 6 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Algeria",
@@ -41,6 +61,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 's'",
       hint4: "This capital begins with an 'A'",
       hint5: "This capital is 7 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Andorra",
@@ -53,6 +74,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'a'",
       hint4: "This capital begins with an 'A'",
       hint5: "This capital ends with the word 'Vella'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Argentina",
@@ -67,6 +89,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 2 words long",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital ends with the word 'Aires'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Australia",
@@ -80,6 +103,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'a'",
       hint4: "This capital begins with a 'C'",
       hint5: "This capital is 7 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Austria",
@@ -93,6 +117,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with a vowel",
       hint4: "This capital begins with a 'V'",
       hint5: "This capital is 6 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Azerbaijan",
@@ -105,6 +130,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'u'",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital is 4 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bahamas",
@@ -117,6 +143,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'u'",
       hint4: "This capital begins with an 'N'",
       hint5: "This capital is 6 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bahrain",
@@ -130,6 +157,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letters 'ama'",
       hint4: "This capital begins with an 'M'",
       hint5: "This capital is 6 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bangladesh",
@@ -144,6 +172,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'a'",
       hint4: "This capital begins with a 'D'",
       hint5: "This capital is 5 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Barbados",
@@ -157,6 +186,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letters 'own'",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital is 10 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Belarus",
@@ -170,6 +200,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 'k'",
       hint4: "This capital begins with an 'M'",
       hint5: "This capital is 5 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Belgium",
@@ -183,6 +214,7 @@ exports.seed = async function (knex) {
       hint3: "This capital ends with the letter 's'",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital is 8 letters long",
+      challenge_date: dates.pop(),
     },
     {
       name: "Belize",
@@ -196,6 +228,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 8 letters long",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital ends with the letters 'pan'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Benin",
@@ -209,6 +242,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 2 words long with a hyphen",
       hint4: "This capital begins with a 'P'",
       hint5: "This capital ends with the word 'Novo'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bhutan",
@@ -221,6 +255,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 6 letters long",
       hint4: "This capital begins with a 'T'",
       hint5: "This capital ends with the letters 'phu'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bolivia",
@@ -234,6 +269,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 2 words long",
       hint4: "This capital begins with a 'L'",
       hint5: "This capital ends with the word 'Paz'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bosnia and Herzegovina",
@@ -248,6 +284,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 8 letters long",
       hint4: "This capital begins with a 'S'",
       hint5: "This capital ends with the letters 'evo'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Botswana",
@@ -260,6 +297,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 8 letters long",
       hint4: "This capital begins with a 'G'",
       hint5: "This capital ends with the letters 'rone'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Brazil",
@@ -272,6 +310,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 7 letters long",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital ends with the letters 'lia'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Brunei",
@@ -284,6 +323,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 3 words long",
       hint4: "This capital begins with a 'B'",
       hint5: "This capital ends with the word 'Begawan'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Bulgaria",
@@ -296,6 +336,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 5 letters long",
       hint4: "This capital begins with a 'S'",
       hint5: "This capital ends with the letter 'a'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Burkina Faso",
@@ -308,6 +349,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 11 letters long",
       hint4: "This capital begins with an 'O'",
       hint5: "This capital ends with the letters 'gou'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Burundi",
@@ -320,6 +362,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 6 letters long",
       hint4: "This capital begins with a 'G'",
       hint5: "This capital ends with the letter 'a'",
+      challenge_date: dates.pop(),
     },
     {
       name: "Cambodia",
@@ -332,6 +375,7 @@ exports.seed = async function (knex) {
       hint3: "This capital is 2 words long",
       hint4: "This capital begins with a 'P'",
       hint5: "This capital ends with the word 'Penh'",
+      challenge_date: dates.pop(),
     },
   ]);
 };

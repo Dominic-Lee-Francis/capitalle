@@ -15,6 +15,7 @@ exports.up = function (knex) {
     table.string("hint4"); // hint 4
     table.string("hint5"); // hint 5
     table.boolean("picked").defaultTo(false); // whether the country has been picked, once a country appears it won't appear again
+    table.date("challenge_date"); // date of the challenge
   });
 };
 
