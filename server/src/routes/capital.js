@@ -106,11 +106,11 @@ router.put("/updateBestStreak", async (req, res) => {
 // true they have completed the quiz, if it is false they have not
 router.get("/checkQuiz", async (req, res) => {
   try {
+    const { user } = req.body;
     const checkQuiz = await pool.query(
       "SELECT quiz_completed_today FROM users WHERE username = $1",
-      [req.user?.username]
+      [user.username]
     );
-    console.log(req.user?.username);
     res.json(checkQuiz.rows[0]);
   } catch (error) {
     console.error(error.message);
