@@ -1,7 +1,6 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 
 const Home = ({ country, user }) => {
   // get the capital from the country object in the database
