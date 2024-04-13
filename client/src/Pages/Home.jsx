@@ -28,6 +28,8 @@ const Home = ({ country, user }) => {
   // eslint-disable-next-line
   const [correct, setCorrect] = useState(false);
 
+  // check if user has completed the quiz today
+
   // check the answer in the form submission
   const checkAnswer = (e) => {
     e.preventDefault();

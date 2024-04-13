@@ -107,6 +107,7 @@ router.put("/updateBestStreak", async (req, res) => {
 router.get("/checkQuiz", async (req, res) => {
   try {
     const { user } = req.body;
+    console.log(user);
     const checkQuiz = await pool.query(
       "SELECT quiz_completed_today FROM users WHERE username = $1",
       [user.username]

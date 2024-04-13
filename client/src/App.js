@@ -62,7 +62,7 @@ function App() {
       if (token) {
         setUser(jwt_decode(token));
       }
-    }, 1000); // Change the interval time as per your requirement
+    }, 1000); // Change the interval time as per your requirement - check every second for the token
     return () => clearInterval(interval);
   }, []);
 
@@ -91,6 +91,7 @@ function App() {
     getUser();
   }, []);
 
+  // JWT Refresh Token
   const refreshToken = async () => {
     try {
       const response = await axios.post(`${BASE_URL}/api/refresh`, {
@@ -107,8 +108,10 @@ function App() {
     }
   };
 
+  // Axios JWT - used to intercept requests and add the JWT token
   const axiosJWT = axios.create();
 
+  // Add a request interceptor - to add the JWT token to the request
   axiosJWT.interceptors.request.use(
     async (config) => {
       let currentDate = new Date();
