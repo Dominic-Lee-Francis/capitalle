@@ -62,7 +62,7 @@ passport.deserializeUser((user, done) => {
 // Cors is used for enabling CORS with various options such as origin, methods, credentials
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://capitalle.netlify.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
