@@ -79,6 +79,6 @@ app.use("/capital", capitalRoutes);
 app.use("/api", tokenRoutes);
 
 // Server setup
-app.listen(8080, () => {
+app.listen(8000, () => {
   console.log("Server is running on port 8080");
 });
