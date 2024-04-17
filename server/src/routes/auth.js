@@ -2,13 +2,17 @@ const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 
+const dotenv = require("dotenv");
+dotenv.config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 // db setup (will need to change for deployment)
 const pool = require("../../db/dbconfig.js");
 
 // client URL for development (will need to change for deployment)
-const CLIENT_URL = "http://localhost:3000";
-const REGISTER_URL = "http://localhost:3000/register";
-const FAILURE_URL = "http://localhost:3000/rules";
+const CLIENT_URL = FRONTEND_URL;
+const REGISTER_URL = `${FRONTEND_URL}/register`;
+const FAILURE_URL = `${FRONTEND_URL}/failure`;
 
 // REGISTER
 router.post("/register", async (req, res) => {

@@ -25,6 +25,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
 const PORT = process.env.PORT;
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // Middleware
 app.use(express.json()); // parse json data req.body
@@ -63,7 +64,7 @@ passport.deserializeUser((user, done) => {
 // Cors is used for enabling CORS with various options such as origin, methods, credentials
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

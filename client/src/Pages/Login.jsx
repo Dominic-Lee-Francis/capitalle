@@ -41,6 +41,7 @@ const Login = () => {
     if (token) {
       setUser(jwt_decode(token));
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
