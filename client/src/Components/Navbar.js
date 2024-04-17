@@ -21,7 +21,7 @@ const Navbar = ({ user }) => {
       });
 
     // Redirect to the logout URL
-    window.open(`${BASE_URL}/auth/logout", "_self`);
+    window.open(`${BASE_URL}/auth/logout`, "_self");
 
     // Clear the session storage, cookies, and local storage
     sessionStorage.clear();
