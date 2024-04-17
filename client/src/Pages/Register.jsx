@@ -9,7 +9,7 @@ const Register = () => {
   const [password2, setPassword2] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const BASE_URL = "http://localhost:8080";
+  const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
   const onSubmitForm = async (e) => {
     e.preventDefault();

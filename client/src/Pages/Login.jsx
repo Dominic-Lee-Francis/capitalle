@@ -3,12 +3,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
+const BASE_URL = process.env.REACT_APP_SERVER_URL;
+
 const Login = () => {
   const google = () => {
-    window.open(`${process.env.REACT_APP_SERVER_URL}/auth/google`, "_self");
+    window.open(`${BASE_URL}/auth/google`, "_self");
   };
   const github = () => {
-    window.open(`${process.env.REACT_APP_SERVER_URL}/auth/github`, "_self");
+    window.open(`${BASE_URL}/auth/github`, "_self");
   };
 
   const [user, setUser] = useState(null); // { username: "", password: "" }
@@ -18,13 +20,10 @@ const Login = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/api/login`,
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/api/login`, {
+        username,
+        password,
+      });
       setUser(response.data);
       // Store user data in a cookie or local storage
       // Example using cookies:

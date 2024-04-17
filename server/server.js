@@ -63,9 +63,9 @@ passport.deserializeUser((user, done) => {
 // Cors is used for enabling CORS with various options such as origin, methods, credentials
 app.use(
   cors({
-    origin: "https://capitalle.netlify.app/",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: false,
   })
 );
 
@@ -80,11 +80,11 @@ app.use("/capital", capitalRoutes);
 app.use("/api", tokenRoutes);
 
 //postman test
-app.get("/", (req, res) => {
+app.get("/postman", (req, res) => {
   res.send("Welcome to Capitalle API");
 });
 
 // Server setup
 app.listen(PORT, () => {
-  console.log("Server is running on port 8000");
+  console.log(`Server is running on port ${PORT}`);
 });
