@@ -1,6 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
-const LocalStrategy = require("passport-local").Strategy;
+
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 const passport = require("passport");
@@ -10,8 +10,6 @@ const bcrypt = require("bcrypt");
 const pool = require("./db/dbconfig.js");
 
 // client URL for development (will need to change for deployment)
-const CLIENT_URL = "http://localhost:3000/";
-const FAILURE_URL = "http://localhost:3000/rules";
 
 // Google OAuth Strategy
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;

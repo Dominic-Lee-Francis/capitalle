@@ -6,9 +6,8 @@ const bcrypt = require("bcrypt");
 const pool = require("../../db/dbconfig.js");
 
 // client URL for development (will need to change for deployment)
-const CLIENT_URL = "http://localhost:3000/";
-const REGISTER_URL = "http://localhost:3000/register";
-const FAILURE_URL = "http://localhost:3000/rules";
+const CLIENT_URL = "https://capitalle.netlify.app/";
+const FAILURE_URL = "https://capitalle.netlify.app/rules";
 
 // REGISTER
 router.post("/register", async (req, res) => {

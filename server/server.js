@@ -24,6 +24,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(express.json()); // parse json data req.body
@@ -78,7 +79,12 @@ app.use("/capital", capitalRoutes);
 // Token routes
 app.use("/api", tokenRoutes);
 
+//postman test
+app.get("/", (req, res) => {
+  res.send("Welcome to Capitalle API");
+});
+
 // Server setup
-app.listen(8000, () => {
-  console.log("Server is running on port 8080");
+app.listen(PORT, () => {
+  console.log("Server is running on port 8000");
 });
