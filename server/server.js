@@ -17,14 +17,19 @@ const tokenRoutes = require("./src/routes/token.js");
 const cookieParser = require("cookie-parser");
 // cookie session
 const cookieSession = require("cookie-session");
+// path
+const path = require("path");
 // Server setup
 const app = express();
 
 //dotenv
 const dotenv = require("dotenv");
 dotenv.config();
+// EXPRESS SESSION SECRET KEY
 const EXPRESS_SESSION_SECRET_KEY = process.env.EXPRESS_SESSION_SECRET_KEY;
-const PORT = process.env.PORT;
+// PORT
+const PORT = process.env.PORT || 8080;
+// FRONTEND URL
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // Middleware
@@ -70,6 +75,11 @@ app.use(
   })
 );
 
+// NODE ENV - development or production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
+
 // ROUTES //
 // Auth routes
 app.use("/auth", authRoutes);
@@ -83,6 +93,11 @@ app.use("/api", tokenRoutes);
 //postman test
 app.get("/postman", (req, res) => {
   res.send("Welcome to Capitalle API");
+});
+
+// catch all route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 // Server setup

@@ -5,13 +5,11 @@ import axios from "axios";
 
 const cookies = new Cookies();
 
-const BASE_URL = process.env.REACT_APP_SERVER_URL;
-
 const Navbar = ({ user }) => {
   const logout = async () => {
     // axios post to the logout URL
     await axios
-      .post(`${BASE_URL}/api/logout`)
+      .post(`/api/logout`)
       .then((response) => {
         console.log(response);
       })
@@ -20,7 +18,7 @@ const Navbar = ({ user }) => {
       });
 
     // Redirect to the logout URL
-    window.open(`${BASE_URL}/auth/logout`, "_self");
+    window.open(`/auth/logout`, "_self");
 
     // Clear the session storage, cookies, and local storage
     sessionStorage.clear();
