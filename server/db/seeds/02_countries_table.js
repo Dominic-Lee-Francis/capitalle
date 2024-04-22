@@ -5,8 +5,8 @@
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("countries").del();
-  const startDate = new Date("2024-04-20");
-  const endDate = new Date("2024-05-30");
+  const startDate = new Date("2024-04-22");
+  const endDate = new Date("2024-06-14");
   const dates = [];
 
   for (
@@ -32,8 +32,8 @@ exports.seed = async function (knex) {
         "Kabul is known for its rich history and cultural heritage. It is home to many historical sites, including the famous Babur's Gardens and the Kabul Museum. The city is also known for its vibrant bazaars and delicious Afghan cuisine. Fun fact: Kabul is one of the highest capital cities in the world, located at an elevation of over 5,900 feet (1,800 meters) above sea level.",
       hint1: "This capital has been inhabited for over 3,500 years",
       hint2: "This capital has been through many wars",
-      hint3: "This capital ends with the letter 'l'",
-      hint4: "This capital begins with a 'K'",
+      hint3: "This capital ends with 'l'",
+      hint4: "This capital begins with 'K'",
       hint5: "This capital is 5 letters long",
       challenge_date: dates.pop(),
     },
@@ -45,8 +45,8 @@ exports.seed = async function (knex) {
         "Tirana is known for its vibrant culture, lively nightlife, and beautiful architecture. The city is home to many museums, art galleries, and theaters, as well as a variety of restaurants and cafes. Fun fact: Tirana is one of the sunniest cities in Europe, with an average of 2,544 hours of sunshine per year.",
       hint1: "This capital is near the Adriatic Sea",
       hint2: "From this capital, you can see the Dajti Mountain",
-      hint3: "This capital ends with the letter 'a'",
-      hint4: "This capital begins with a 'T'",
+      hint3: "This capital ends with 'a'",
+      hint4: "This capital begins with 'T'",
       hint5: "This capital is 6 letters long",
       challenge_date: dates.pop(),
     },
@@ -58,8 +58,8 @@ exports.seed = async function (knex) {
         "Algiers is the capital and largest city of Algeria. It is known for its rich history, diverse culture, and stunning architecture. The city is home to many historical landmarks, such as the Casbah of Algiers and the Notre Dame d'Afrique. Fun fact: Algiers is located on the Mediterranean Sea and offers beautiful views of the coastline.",
       hint1: "This capital is near the Mediterranean Sea",
       hint2: "This capital has was once a pirate stronghold",
-      hint3: "This capital ends with the letter 's'",
-      hint4: "This capital begins with an 'A'",
+      hint3: "This capital ends with 's'",
+      hint4: "This capital begins with 'A'",
       hint5: "This capital is 7 letters long",
       challenge_date: dates.pop(),
     },
@@ -72,8 +72,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located in the Pyrenees mountains",
       hint2: "This capital is 3 words long with 2 spaces",
       hint3: "This capital ends with the letter 'a'",
-      hint4: "This capital begins with an 'A'",
-      hint5: "This capital ends with the word 'Vella'",
+      hint4: "This capital begins with 'A'",
+      hint5: "This capital ends with 'Vella'",
       challenge_date: dates.pop(),
     },
     {
@@ -85,9 +85,9 @@ exports.seed = async function (knex) {
       hint1:
         "This capital is the second largest city in South America after São Paulo",
       hint2:
-        "This capital is home to the famous La Recoleta Cemetery and the Teatro Colón",
+        "This capital can be translated to 'Good Airs' in English, but it is not the official translation",
       hint3: "This capital is 2 words long",
-      hint4: "This capital begins with a 'B'",
+      hint4: "This capital begins with 'B'",
       hint5: "This capital ends with the word 'Aires'",
       challenge_date: dates.pop(),
     },
@@ -100,8 +100,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is the largest inland city in Australia",
       hint2:
         "This capital was founded in 1913 as a compromise between Sydney and Melbourne",
-      hint3: "This capital ends with the letter 'a'",
-      hint4: "This capital begins with a 'C'",
+      hint3: "This capital ends with 'a'",
+      hint4: "This capital begins with 'C'",
       hint5: "This capital is 7 letters long",
       challenge_date: dates.pop(),
     },
@@ -114,8 +114,8 @@ exports.seed = async function (knex) {
       hint1: "Famous people such as Mozart and Beethoven lived in this capital",
       hint2:
         "This capital is known for its coffee house culture and delicious pastries",
-      hint3: "This capital ends with a vowel",
-      hint4: "This capital begins with a 'V'",
+      hint3: "This capital ends with 'a'",
+      hint4: "This capital begins with 'V'",
       hint5: "This capital is 6 letters long",
       challenge_date: dates.pop(),
     },
@@ -127,8 +127,8 @@ exports.seed = async function (knex) {
         "Baku is the capital and largest city of Azerbaijan. It is known for its modern architecture, rich history, and cultural heritage. The city is located on the Caspian Sea and offers beautiful views of the waterfront. Fun fact: Baku is home to the Flame Towers, a trio of skyscrapers that are illuminated with LED lights at night.",
       hint1: "This capital holds a F1 Grand Prix every year",
       hint2: "This capital was once given the nickname 'Paris of the East'",
-      hint3: "This capital ends with the letter 'u'",
-      hint4: "This capital begins with a 'B'",
+      hint3: "This capital ends with 'u'",
+      hint4: "This capital begins with 'B'",
       hint5: "This capital is 4 letters long",
       challenge_date: dates.pop(),
     },
@@ -140,8 +140,8 @@ exports.seed = async function (knex) {
         "Nassau is the capital and largest city of The Bahamas. It is known for its beautiful beaches, vibrant culture, and colorful architecture. The city offers a wide range of activities, including snorkeling, diving, and shopping. Fun fact: Nassau is located on New Providence Island and is a popular cruise ship destination.",
       hint1: "This capital was once the pirate stronghold of the Caribbean",
       hint2: "This capital is located on New Providence Island",
-      hint3: "This capital ends with the letter 'u'",
-      hint4: "This capital begins with an 'N'",
+      hint3: "This capital ends with 'u'",
+      hint4: "This capital begins with 'N'",
       hint5: "This capital is 6 letters long",
       challenge_date: dates.pop(),
     },
@@ -197,8 +197,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located on the Svislach and Nyamiha rivers",
       hint2:
         "This capital has had a turbulent history, including being destroyed during World War II and rebuilt afterwards",
-      hint3: "This capital ends with the letter 'k'",
-      hint4: "This capital begins with an 'M'",
+      hint3: "This capital ends with 'k'",
+      hint4: "This capital begins 'M'",
       hint5: "This capital is 5 letters long",
       challenge_date: dates.pop(),
     },
@@ -211,8 +211,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is also known as the 'Capital of Europe'",
       hint2:
         "This capital has had a significant role in European history and politics, such as hosting the headquarters of NATO and the European Commission",
-      hint3: "This capital ends with the letter 's'",
-      hint4: "This capital begins with a 'B'",
+      hint3: "This capital ends with 's'",
+      hint4: "This capital begins 'B'",
       hint5: "This capital is 8 letters long",
       challenge_date: dates.pop(),
     },
@@ -226,8 +226,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital has the smallest population of any capital city in Central America",
       hint3: "This capital is 8 letters long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the letters 'pan'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'pan'",
       challenge_date: dates.pop(),
     },
     {
@@ -240,8 +240,8 @@ exports.seed = async function (knex) {
       hint2:
         "Some people consider this capital to be the cultural capital of Benin, while Cotonou is the economic capital",
       hint3: "This capital is 2 words long with a hyphen",
-      hint4: "This capital begins with a 'P'",
-      hint5: "This capital ends with the word 'Novo'",
+      hint4: "This capital begins with 'P'",
+      hint5: "This capital ends with 'Novo'",
       challenge_date: dates.pop(),
     },
     {
@@ -253,8 +253,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located in the Himalayas",
       hint2: "This capital is known as the happiest city in Asia",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'T'",
-      hint5: "This capital ends with the letters 'phu'",
+      hint4: "This capital begins with 'T'",
+      hint5: "This capital ends with 'phu'",
       challenge_date: dates.pop(),
     },
     {
@@ -267,8 +267,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital translates to 'The Peace' in Spanish, but it is not the official capital of Bolivia",
       hint3: "This capital is 2 words long",
-      hint4: "This capital begins with a 'L'",
-      hint5: "This capital ends with the word 'Paz'",
+      hint4: "This capital begins with 'L'",
+      hint5: "This capital ends with 'Paz'",
       challenge_date: dates.pop(),
     },
     {
@@ -282,8 +282,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital has been influenced by Ottoman, Austro-Hungarian, and Yugoslav cultures",
       hint3: "This capital is 8 letters long",
-      hint4: "This capital begins with a 'S'",
-      hint5: "This capital ends with the letters 'evo'",
+      hint4: "This capital begins with 'S'",
+      hint5: "This capital ends with 'evo'",
       challenge_date: dates.pop(),
     },
     {
@@ -295,8 +295,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located on the Notwane River",
       hint2: "This capital is known for its diamond trade",
       hint3: "This capital is 8 letters long",
-      hint4: "This capital begins with a 'G'",
-      hint5: "This capital ends with the letters 'rone'",
+      hint4: "This capital begins with 'G'",
+      hint5: "This capital ends with 'rone'",
       challenge_date: dates.pop(),
     },
     {
@@ -308,8 +308,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is a UNESCO World Heritage Site",
       hint2: "This capital is the third most populous city in Brazil",
       hint3: "This capital is 7 letters long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the letters 'lia'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'lia'",
       challenge_date: dates.pop(),
     },
     {
@@ -321,8 +321,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known for its golden-domed mosques",
       hint2: "This capital is located on the island of Borneo",
       hint3: "This capital is 3 words long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the word 'Begawan'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'Begawan'",
       challenge_date: dates.pop(),
     },
     {
@@ -334,8 +334,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located at the foot of Vitosha Mountain",
       hint2: "This capital is known for its mineral springs and thermal baths",
       hint3: "This capital is 5 letters long",
-      hint4: "This capital begins with a 'S'",
-      hint5: "This capital ends with the letter 'a'",
+      hint4: "This capital begins with 'S'",
+      hint5: "This capital ends with 'a'",
       challenge_date: dates.pop(),
     },
     {
@@ -347,8 +347,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known for its lively music and dance scene",
       hint2: "One time this capital was known as 'Wogodogo'",
       hint3: "This capital is 11 letters long",
-      hint4: "This capital begins with an 'O'",
-      hint5: "This capital ends with the letters 'gou'",
+      hint4: "This capital begins with 'O'",
+      hint5: "This capital ends with 'gou'",
       challenge_date: dates.pop(),
     },
     {
@@ -360,8 +360,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known for its traditional drumming ceremonies",
       hint2: "Famously known as the 'City of Hills'",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'G'",
-      hint5: "This capital ends with the letter 'a'",
+      hint4: "This capital begins with 'G'",
+      hint5: "This capital ends with 'a'",
       challenge_date: dates.pop(),
     },
     {
@@ -373,8 +373,8 @@ exports.seed = async function (knex) {
       hint1: "This capital was once known as the 'Pearl of Asia'",
       hint2: "This capital is known for its French colonial architecture",
       hint3: "This capital is 2 words long",
-      hint4: "This capital begins with a 'P'",
-      hint5: "This capital ends with the word 'Penh'",
+      hint4: "This capital begins with 'P'",
+      hint5: "This capital ends with 'Penh'",
       challenge_date: dates.pop(),
     },
     {
@@ -386,8 +386,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known as the 'City of Seven Hills'",
       hint2: "This capital is the second largest city in Cameroon",
       hint3: "This capital is 7 letters long",
-      hint4: "This capital begins with a 'Y'",
-      hint5: "This capital ends with the letter 'dé'",
+      hint4: "This capital begins with 'Y'",
+      hint5: "This capital ends with 'dé'",
       challenge_date: dates.pop(),
     },
     {
@@ -399,8 +399,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is the second coldest capital city in the world",
       hint2: "This capital is known for its tulip festival",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with an 'O'",
-      hint5: "This capital ends with the letter 'a'",
+      hint4: "This capital begins with 'O'",
+      hint5: "This capital ends with 'a'",
       challenge_date: dates.pop(),
     },
     {
@@ -412,8 +412,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located on the Atlantic Ocean",
       hint2: "This capital is known for its colorful colonial architecture",
       hint3: "This capital is 5 letters long",
-      hint4: "This capital begins with a 'P'",
-      hint5: "This capital ends with the letter 'a'",
+      hint4: "This capital begins with 'P'",
+      hint5: "This capital ends with 'a'",
       challenge_date: dates.pop(),
     },
     {
@@ -426,8 +426,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital is famous because it is the only city in the country",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the letter 'gui'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'gui'",
       challenge_date: dates.pop(),
     },
     {
@@ -439,8 +439,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known as the 'City of Sands'",
       hint2: "This capital is the largest city in Chad",
       hint3: "This capital is 8 letters long",
-      hint4: "This capital begins with an 'N'D",
-      hint5: "This capital ends with the letters 'ena'",
+      hint4: "This capital begins with 'N'D",
+      hint5: "This capital ends with 'ena'",
       challenge_date: dates.pop(),
     },
     {
@@ -453,8 +453,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital was founded in 1541 by the Spanish conquistador Pedro de Valdivia",
       hint3: "This capital is 8 letters long",
-      hint4: "This capital begins with an 'S'",
-      hint5: "This capital ends with the letter 'go'",
+      hint4: "This capital begins with 'S'",
+      hint5: "This capital ends with 'go'",
       challenge_date: dates.pop(),
     },
     {
@@ -468,8 +468,8 @@ exports.seed = async function (knex) {
       hint2:
         "This capital houses the largest palace complex in the world, known as the Forbidden City",
       hint3: "This capital is 7 letters long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the letters 'g'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'g'",
       challenge_date: dates.pop(),
     },
     {
@@ -481,8 +481,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is one of the highest capital cities in the world",
       hint2: "Famous for its emeralds and coffee",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'B'",
-      hint5: "This capital ends with the letter 'tá'",
+      hint4: "This capital begins with 'B'",
+      hint5: "This capital ends with 'tá'",
       challenge_date: dates.pop(),
     },
     {
@@ -494,8 +494,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is located on the Indian Ocean",
       hint2: "This capital is known for its volcanic landscapes",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with an 'M'",
-      hint5: "This capital ends with the letter 'i'",
+      hint4: "This capital begins with 'M'",
+      hint5: "This capital ends with 'i'",
       challenge_date: dates.pop(),
     },
     {
@@ -507,8 +507,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known for its coffee production",
       hint2: "This capital is the second largest city in Central America",
       hint3: "This capital is 2 words long and 7 letters excluding the space",
-      hint4: "This capital begins with an 'S'",
-      hint5: "This capital ends with the letters 'é'",
+      hint4: "This capital begins with 'S'",
+      hint5: "This capital ends with 'é'",
       challenge_date: dates.pop(),
     },
     {
@@ -520,8 +520,8 @@ exports.seed = async function (knex) {
       hint1: "This capital is known for its Austro-Hungarian architecture",
       hint2: "Famous people such as Nikola Tesla were born in this capital",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'Z'",
-      hint5: "This capital ends with the letter 'b'",
+      hint4: "This capital begins with 'Z'",
+      hint5: "This capital ends with 'b'",
       challenge_date: dates.pop(),
     },
     {
@@ -534,8 +534,8 @@ exports.seed = async function (knex) {
       hint2:
         "Many famous people such as Ernest Hemingway and Nat King Cole lived in this capital",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with an 'H'",
-      hint5: "This capital ends with the letter 'a'",
+      hint4: "This capital begins with 'H'",
+      hint5: "This capital ends with 'a'",
       challenge_date: dates.pop(),
     },
     {
@@ -548,9 +548,8 @@ exports.seed = async function (knex) {
         "This capital is the only divided capital in the world between Greek and Turkish Cypriots",
       hint2: "This capital can be traced back to the Bronze Age",
       hint3: "This capital is 7 letters long",
-      hint4: "This capital begins with an 'N'",
-      hint5: "This capital ends with the letter 'a'",
-      challenge_date: dates.pop(),
+      hint4: "This capital begins with 'N'",
+      hint5: "This capital ends with 'a'",
     },
     {
       name: "Czech Republic",
@@ -561,8 +560,184 @@ exports.seed = async function (knex) {
       hint1: "This capital is home to the famous Astronomical Clock",
       hint2: "This capital is the historical capital of Bohemia",
       hint3: "This capital is 6 letters long",
-      hint4: "This capital begins with a 'P'",
-      hint5: "This capital ends with the letter 'e'",
+      hint4: "This capital begins with 'P'",
+      hint5: "This capital ends with 'e'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Denmark",
+      capital: "Copenhagen",
+      flag: "https://flagcdn.com/dk.svg",
+      description:
+        "Copenhagen is the capital and largest city of Denmark. It is known for its rich history, stunning architecture, and vibrant culture. The city offers a mix of historical landmarks, such as the Tivoli Gardens and the Little Mermaid statue, as well as modern attractions, including shopping malls and restaurants. Fun fact: Copenhagen is located on the eastern coast of the island of Zealand.",
+      hint1: "This capital is known for its biking culture",
+      hint2:
+        "This capital is is one of the most sustainable cities in the world",
+      hint3: "This capital is 10 letters long",
+      hint4: "This capital begins with 'C'",
+      hint5: "This capital ends with 'en'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Djibouti",
+      capital: "Djibouti",
+      flag: "https://flagcdn.com/dj.svg",
+      description:
+        "Djibouti is the capital and largest city of Djibouti. It is known for its stunning beaches, vibrant culture, and colorful markets. The city offers a mix of historical landmarks, such as the Hamoudi Mosque and the Presidential Palace, as well as modern attractions, including shopping malls and restaurants. Fun fact: Djibouti is located on the Gulf of Tadjoura and offers beautiful views of the Red Sea.",
+      hint1: "This capital has a French name that means 'The Place of Thorns'",
+      hint2: "This capital has many mosques and churches",
+      hint3: "This capital is 7 letters long",
+      hint4: "This capital begins with 'D'",
+      hint5: "This capital ends with 'uti'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Dominica",
+      capital: "Roseau",
+      flag: "https://flagcdn.com/dm.svg",
+      description:
+        "Roseau is the capital and largest city of Dominica. It is known for its stunning natural beauty, vibrant culture, and colorful architecture. The city offers a mix of historical landmarks, such as the Old Market and the Dominica Museum, as well as modern attractions, including shopping malls and restaurants. Fun fact: Roseau is located on the western coast of Dominica and offers beautiful views of the Caribbean Sea.",
+      hint1: "This capital is located on the Roseau River in the Caribbean",
+      hint2: "This capital has many colorful colonial buildings",
+      hint3: "This capital is 6 letters long",
+      hint4: "This capital begins with 'R'",
+      hint5: "This capital ends with 'eau'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Dominican Republic",
+      capital: "Santo Domingo",
+      flag: "https://flagcdn.com/do.svg",
+      description:
+        "Santo Domingo is the capital and largest city of the Dominican Republic. It is known for its rich history, vibrant culture, and stunning architecture. The city offers a mix of historical landmarks, such as the Colonial Zone and the Alcázar de Colón, as well as modern attractions, including shopping malls and restaurants. Fun fact: Santo Domingo is the oldest continuously inhabited European settlement in the Americas.",
+      hint1: "This capital was founded by Christopher Columbus in 1492",
+      hint2: "This capital is known for its colonial architecture",
+      hint3:
+        "This capital is 2 words and 12 letters long not including the space",
+      hint4: "This capital begins with 'San'",
+      hint5: "This capital ends with 'ngo'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "East Timor",
+      capital: "Dili",
+      flag: "https://flagcdn.com/tl.svg",
+      description:
+        "Dili is the capital and largest city of East Timor. It is known for its stunning beaches, vibrant culture, and colorful markets. The city offers a mix of historical landmarks, such as the Cristo Rei of Dili and the Santa Cruz Cemetery, as well as modern attractions, including shopping malls and restaurants. Fun fact: Dili is located on the northern coast of Timor Island and offers beautiful views of the surrounding landscape.",
+      hint1: "This capital is known for its Portuguese colonial architecture",
+      hint2: "This capital is found near the Wetar Strait in the Pacific Ocean",
+      hint3: "This capital is 4 letters long",
+      hint4: "This capital begins with 'D'",
+      hint5: "This capital ends with 'i'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Ecuador",
+      capital: "Quito",
+      flag: "https://flagcdn.com/ec.svg",
+      description:
+        "Quito is the capital and largest city of Ecuador. It is known for its rich history, stunning architecture, and vibrant culture. The city offers a mix of historical landmarks, such as the Old Town and the Basilica del Voto Nacional, as well as modern attractions, including shopping malls and restaurants. Fun fact: Quito is located in the Andes Mountains and offers beautiful views of the surrounding landscape.",
+      hint1: "This capital is the highest official capital city in the world",
+      hint2: "This capital produces some of the best roses in the world",
+      hint3: "This capital is 5 letters long",
+      hint4: "This capital begins with 'Q'",
+      hint5: "This capital ends with 'o'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Egypt",
+      capital: "Cairo",
+      flag: "https://flagcdn.com/eg.svg",
+      description:
+        "Cairo is the capital and largest city of Egypt. It is known for its rich history, stunning architecture, and vibrant culture. The city offers a mix of historical landmarks, such as the Pyramids of Giza and the Egyptian Museum, as well as modern attractions, including shopping malls and restaurants. Fun fact: Cairo is located on the banks of the Nile River and offers beautiful views of the surrounding desert.",
+      hint1: "This capital is the largest city in Africa",
+      hint2:
+        "This capital was once the home of the ancient Pharaohs and the Great Sphinx",
+      hint3: "This capital is 5 letters long",
+      hint4: "This capital begins with 'C'",
+      hint5: "This capital ends with 'o'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "El Salvador",
+      capital: "San Salvador",
+      flag: "https://flagcdn.com/sv.svg",
+      description:
+        "San Salvador is the capital and largest city of El Salvador. It is known for its rich history, vibrant culture, and stunning architecture. The city offers a mix of historical landmarks, such as the National Palace and the Metropolitan Cathedral, as well as modern attractions, including shopping malls and restaurants. Fun fact: San Salvador is located in a valley surrounded by volcanoes.",
+      hint1: "This capital is known as the 'Valley of the Hammocks'",
+      hint2: "This capital is the second largest city in Central America",
+      hint3:
+        "This capital is 2 words and 11 letters long not including the space",
+      hint4: "This capital begins with 'San'",
+      hint5: "This capital ends with 'dor'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Equatorial Guinea",
+      capital: "Malabo",
+      flag: "https://flagcdn.com/gq.svg",
+      description:
+        "Malabo is the capital and largest city of Equatorial Guinea. It is known for its stunning beaches, vibrant culture, and colorful markets. The city offers a mix of historical landmarks, such as the Malabo Cathedral and the Presidential Palace, as well as modern attractions, including shopping malls and restaurants. Fun fact: Malabo is located on the northern coast of Bioko Island and offers beautiful views of the Gulf of Guinea.",
+      hint1: "This capital is located on the island of Bioko",
+      hint2: "This capital produces cocoa, coffee, and timber",
+      hint3: "This capital is 6 letters long",
+      hint4: "This capital begins with 'M'",
+      hint5: "This capital ends with 'o'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Eritrea",
+      capital: "Asmara",
+      flag: "https://flagcdn.com/er.svg",
+      description:
+        "Asmara is the capital and largest city of Eritrea. It is known for its stunning architecture, vibrant culture, and colorful markets. The city offers a mix of historical landmarks, such as the Fiat Tagliero Building and the Asmara Cathedral, as well as modern attractions, including shopping malls and restaurants. Fun fact: Asmara is located in the highlands of Eritrea and offers beautiful views of the surrounding landscape.",
+      hint1: "This capital is located in the Horn of Africa",
+      hint2: "This capital was once an Italian colony",
+      hint3: "This capital is 6 letters long",
+      hint4: "This capital begins with 'A'",
+      hint5: "This capital ends with 'a'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Estonia",
+      capital: "Tallinn",
+      flag: "https://flagcdn.com/ee.svg",
+      description:
+        "Tallinn is the capital and largest city of Estonia. It is known for its rich history, stunning architecture, and vibrant culture. The city offers a mix of historical landmarks, such as the Old Town and the Alexander Nevsky Cathedral, as well as modern attractions, including shopping malls and restaurants. Fun fact: Tallinn is located on the northern coast of Estonia and offers beautiful views of the Baltic Sea.",
+      hint1: "This capital is known for its medieval Old Town",
+      hint2: "This capital had the first Christmas tree in Europe",
+      hint3: "This capital is 7 letters long",
+      hint4: "This capital begins with 'T'",
+      hint5: "This capital ends with 'n'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Eswatini",
+      capital: "Mbabane",
+      flag: "https://flagcdn.com/sz.svg",
+      description:
+        "Mbabane is the administrative capital of Eswatini. It is known for its stunning mountain scenery, vibrant culture, and colorful markets. The city offers a mix of historical landmarks, such as the King Sobhuza II Memorial Park and the Swazi Market, as well as modern attractions, including shopping malls and restaurants. Fun fact: Mbabane is located in the Ezulwini Valley and offers beautiful views of the surrounding landscape.",
+      hint1: "This capital was named after a chief of the region",
+      hint2: "This capital is known for its traditional Swazi crafts",
+      hint3: "This capital is 7 letters long",
+      hint4: "This capital begins with 'M'",
+      hint5: "This capital ends with 'e'",
+      challenge_date: dates.pop(),
+    },
+    {
+      name: "Ethiopia",
+      capital: "Addis Ababa",
+      flag: "https://flagcdn.com/et.svg",
+      description:
+        "Addis Ababa is the capital and largest city of Ethiopia. It is known for its rich history, vibrant culture, and stunning architecture. The city offers a mix of historical landmarks, such as the National Museum and the Holy Trinity Cathedral, as well as modern attractions, including shopping malls and restaurants. Fun fact: Addis Ababa is located in the Ethiopian Highlands and offers beautiful views of the surrounding landscape.",
+      hint1:
+        "This capital is the diplomatic capital of Africa and headquarters of the African Union",
+      hint2:
+        "This capital is believed to be the birthplace of coffee and the Rastafarian movement",
+      hint3:
+        "This capital is 2 words and 10 letters long not including the space",
+      hint4: "This capital begins with 'Ad'",
+      hint5: "This capital ends with 'ba'",
       challenge_date: dates.pop(),
     },
   ]);
